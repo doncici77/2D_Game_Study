@@ -37,9 +37,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded) //점프애니메이션
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            playerAnimation.SetJumping(true);   
+            Debug.Log("점프시작");
+        }
+
+        else if (!isGrounded && rb.linearVelocity.y < -0.1f) //낙하상태
+        {
+            playerAnimation?.SetFalling(true);
+        }
+
+        else if (isGrounded) //착지상태
+        {
+            playerAnimation?.PlayLanding();
         }
     }
 }
