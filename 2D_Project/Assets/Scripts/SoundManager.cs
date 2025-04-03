@@ -79,11 +79,12 @@ public class SoundManager : MonoBehaviour
     {
         if (scene.name == "Tutorial")
         {
-            PlayBGM(BGMType.Tutorial, 0.5f);
+            SetBGMVolume(0.5f);
+            PlayBGM(BGMType.Tutorial, 1f);
         }
         else if (scene.name == "Boss")
         {
-            PlayBGM(BGMType.Boss, 0.5f);
+            PlayBGM(BGMType.Boss, 1f);
         }
     }
 
@@ -190,5 +191,6 @@ public enum SFXType
     Jump,
     TakeDamage,
     Walk,
-    Land
+    Land,
+    ItemGet
 }
