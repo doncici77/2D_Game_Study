@@ -23,4 +23,13 @@ public class PlayerController : MonoBehaviour
         movement.HandleMovement();
         attack.PerformAttack();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Coin"))
+        {
+            GameManager.instance.AddCoin(10);
+            Destroy(collision.gameObject);
+        }
+    }
 }

@@ -1,16 +1,43 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static GameManager instance;
+
+    private int coinCount = 0;
+
+    public Text coinText;
+
+    private void Awake()
     {
-        
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AddCoin(int amount)
     {
-        
+        coinCount += amount;
+        coinText.text = "코인 : " + coinCount.ToString();
+        SoundManager.Instance.PlaySFX(SFXType.ItemGet);
+        PlayerPrefs.SetInt("Coin", coinCount);
+    }
+
+    public int GetCoinCount()
+    {
+        return coinCount;
+    }
+
+    public void ResetCoin()
+    {
+        coinCount = 0;
+        coinText.text = "코인 : " + coinCount.ToString();
+        PlayerPrefs.SetInt("Coin", coinCount);
     }
 }
