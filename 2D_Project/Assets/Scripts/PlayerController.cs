@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack attack;
     private PlayerHealth health;
 
+    private Vector3 startPlayerPos;
+
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
@@ -15,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        startPlayerPos = transform.position;
     }
 
     void Update()
@@ -30,6 +32,12 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.instance.AddCoin(10);
             Destroy(collision.gameObject);
+        }
+        
+        if(collision.CompareTag("DeathZone"))
+        {
+            SoundManager.Instance.PlaySFX(SFXType.TakeDamage);
+            transform.position = startPlayerPos;
         }
     }
 }
