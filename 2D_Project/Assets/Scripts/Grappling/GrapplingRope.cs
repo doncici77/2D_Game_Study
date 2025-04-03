@@ -27,6 +27,13 @@ public class GrapplingRope : MonoBehaviour
 
     private void OnEnable()
     {
+        if (grapplingGun == null || percision <= 0)
+        {
+            Debug.LogError("GrapplingGun이 연결되지 않았거나 precision 값이 잘못되었습니다.");
+            enabled = false;
+            return;
+        }
+
         moveTime = 0;
         m_lineRenderer.positionCount = percision;
         waveSize = StartWaveSize;
@@ -108,6 +115,7 @@ public class GrapplingRope : MonoBehaviour
 
     void DrawRopeNoWaves()
     {
+        Debug.Log("Rope Start: " + grapplingGun.firePoint.position + " | Rope End: " + grapplingGun.grapplePoint); // 로프 위치 확인
         m_lineRenderer.SetPosition(0, grapplingGun.firePoint.position);
         m_lineRenderer.SetPosition(1, grapplingGun.grapplePoint);
     }

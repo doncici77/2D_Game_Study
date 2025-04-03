@@ -52,7 +52,6 @@ public class GrapplingGun : MonoBehaviour
     {
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
-
     }
 
     private void Update()
@@ -66,21 +65,12 @@ public class GrapplingGun : MonoBehaviour
             if (grappleRope.enabled)
             {
                 RotateGun(grapplePoint, false);
+                DrawRopeToTarget();  // 추가: 로프가 목표지점으로 이동하도록 함.
             }
             else
             {
                 Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
                 RotateGun(mousePos, true);
-            }
-
-            if (launchToPoint && grappleRope.isGrappling)
-            {
-                if (launchType == LaunchType.Transform_Launch)
-                {
-                    Vector2 firePointDistnace = firePoint.position - gunHolder.localPosition;
-                    Vector2 targetPos = grapplePoint - firePointDistnace;
-                    gunHolder.position = Vector2.Lerp(gunHolder.position, targetPos, Time.deltaTime * launchSpeed);
-                }
             }
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -93,6 +83,18 @@ public class GrapplingGun : MonoBehaviour
         {
             Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
             RotateGun(mousePos, true);
+        }
+    }
+
+    void DrawRopeToTarget()
+    {
+        if (!grappleRope.isGrappling) return;
+
+        for (int i = 0; i < grappleRope.m_lineRenderer.positionCount; i++)
+        {
+            float delta = (float)i / (grappleRope.m_lineRenderer.positionCount - 1);
+            Vector2 targetPosition = Vector2.Lerp(firePoint.position, grapplePoint, delta);
+            grappleRope.m_lineRenderer.SetPosition(i, targetPosition);
         }
     }
 
@@ -114,18 +116,20 @@ public class GrapplingGun : MonoBehaviour
     void SetGrapplePoint()
     {
         Vector2 distanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
-        if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
+        RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
+
+        Debug.DrawRay(firePoint.position, distanceVector.normalized * 10, Color.red, 2f); //  Ray 가시화
+
+        if (_hit.collider != null)
         {
-            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
-            if (_hit.transform.gameObject.layer == grappableLayerNumber || grappleToAll)
-            {
-                if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
-                {
-                    grapplePoint = _hit.point;
-                    grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
-                    grappleRope.enabled = true;
-                }
-            }
+            Debug.Log("목표 지점: " + _hit.point);
+            grapplePoint = _hit.point;
+            grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
+            grappleRope.enabled = true;
+        }
+        else
+        {
+            Debug.Log("Ray가 충돌하지 않음. 레이어를 확인하세요!");
         }
     }
 
