@@ -12,7 +12,7 @@ public class PlayerEvent : MonoBehaviour
         {
             ArrowKeyObj.SetActive(true);
         }
-        else if(collision.name == "TutorialEvent2")
+        else if (collision.name == "TutorialEvent2")
         {
             SpaceBarKeyObj.SetActive(true);
         }
@@ -24,6 +24,8 @@ public class PlayerEvent : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision == null || collision.gameObject == null) return; // 오브젝트가 삭제되었는지 확인
+
         if (collision.name == "TutorialEvent1")
         {
             ArrowKeyObj.SetActive(false);
