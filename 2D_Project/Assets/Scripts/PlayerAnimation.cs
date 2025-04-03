@@ -35,4 +35,24 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool("IsJumping", false);
         animator.SetBool("IsFalling", false);
     }
+
+    public void PlaySoundWalk()
+    {
+        SoundManager.Instance.PlaySFX(SFXType.Walk);
+    }
+
+    public void PlaySoundAttack()
+    {
+        SoundManager.Instance.PlaySFX(SFXType.Attack);
+    }
+
+    public void PlaySoundJump()
+    {
+        SoundManager.Instance.PlaySFX(SFXType.Jump);
+    }
+
+    public void PlaySoundLand()
+    {
+        SoundManager.Instance.PlaySFX(SFXType.Land);
+    }
 }

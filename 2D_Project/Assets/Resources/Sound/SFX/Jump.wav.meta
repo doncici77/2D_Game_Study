@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c266e86e5ec11e344bf66dede26cbc46
+guid: 482611fe6bc559142a00be6e726b4862
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -25,5 +25,5 @@ AssetOrigin:
   productId: 228835
   packageName: Free Deadly Kombat
   packageVersion: 1.0
-  assetPath: Assets/Deadly Kombat Free version/punch_short_whoosh_16.wav
+  assetPath: Assets/Deadly Kombat Free version/kick_short_whoosh_12.wav
   uploadId: 516598

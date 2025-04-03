@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a715ddf00ff7f24469c72404e8df85e9
+guid: c266e86e5ec11e344bf66dede26cbc46
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -25,5 +25,5 @@ AssetOrigin:
   productId: 228835
   packageName: Free Deadly Kombat
   packageVersion: 1.0
-  assetPath: Assets/Deadly Kombat Free version/face_hit_small_23.wav
+  assetPath: Assets/Deadly Kombat Free version/punch_short_whoosh_16.wav
   uploadId: 516598
