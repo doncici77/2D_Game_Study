@@ -9,6 +9,7 @@ TagManager:
   - DeathZone
   - Ring
   - PlayerAttack
+  - Enemy
   layers:
   - Default
   - TransparentFX

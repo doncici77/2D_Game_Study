@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using Unity.Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -6,7 +9,6 @@ public class PlayerAttack : MonoBehaviour
     public GameObject attackCollider;
     private PlayerAnimation playerAnimation;
     private Animator animator;
-
     private bool isAttacking = false;
 
     [Header("애니메이션 상태 이름")]
@@ -20,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void PerformAttack()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (Input.GetButtonDown("Fire1"))
         {
             if (isAttacking)
             {
@@ -40,7 +42,7 @@ public class PlayerAttack : MonoBehaviour
     {
         isAttacking = true;
 
-        yield return null; // 다음 플레임까지 대기
+        yield return null; // 다음 프레임까지 대기
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         if (stateInfo.IsName(attackStateName))

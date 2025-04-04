@@ -24,15 +24,17 @@ public class PlayerEvent : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.name == "TutorialEvent1" && ArrowKeyObj.activeSelf == true)
+        if (collision == null || collision.gameObject == null) return; // 삭제된 오브젝트 예외 처리
+
+        if (collision.name == "TutorialEvent1" && ArrowKeyObj != null)
         {
             ArrowKeyObj.SetActive(false);
         }
-        else if (collision.name == "TutorialEvent2" && SpaceBarKeyObj.activeSelf == true)
+        else if (collision.name == "TutorialEvent2" && SpaceBarKeyObj != null)
         {
             SpaceBarKeyObj.SetActive(false);
         }
-        else if (collision.name == "TutorialEvent3" && AttackKeyObj.activeSelf == true)
+        else if (collision.name == "TutorialEvent3" && AttackKeyObj != null)
         {
             AttackKeyObj.SetActive(false);
         }
