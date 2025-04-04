@@ -38,8 +38,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        movement.HandleMovement();
-        attack.PerformAttack();
+        Debug.Log("!Input.GetKeyDown(KeyCode.Mouse1) || !Input.GetKey(KeyCode.Mouse1)" + (!Input.GetKeyDown(KeyCode.Mouse1) || !Input.GetKey(KeyCode.Mouse1)));
+        if (!Input.GetKeyDown(KeyCode.Mouse1) || !Input.GetKey(KeyCode.Mouse1))
+        {
+            movement.HandleMovement();
+            attack.PerformAttack();
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
