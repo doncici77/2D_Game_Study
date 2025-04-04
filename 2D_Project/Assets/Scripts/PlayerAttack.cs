@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public GameObject attackCollider;
     private PlayerAnimation playerAnimation;
     private Animator animator;
 
@@ -53,5 +54,15 @@ public class PlayerAttack : MonoBehaviour
         }
 
         isAttacking = false;
+    }
+
+    public void OnAttack()
+    {
+        attackCollider.SetActive(true);
+    }
+
+    public void OffAttack()
+    {
+        attackCollider.SetActive(false);
     }
 }

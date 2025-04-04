@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
 
     private PlayerAnimation playerAnimation;
+    private float localScaleX;
 
     private void Start()
     {
@@ -33,7 +34,14 @@ public class PlayerMovement : MonoBehaviour
 
         if(moveInput != 0)
         {
-            GetComponent<SpriteRenderer>().flipX = moveInput < 0;
+            if(moveInput < 0)
+            {
+                transform.localScale = new Vector3(-6, transform.localScale.y, transform.localScale.z);
+            }
+            else
+            {
+                transform.localScale = new Vector3(6, transform.localScale.y, transform.localScale.z);
+            }
         }
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
