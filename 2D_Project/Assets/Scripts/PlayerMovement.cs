@@ -4,6 +4,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
     public float jumpForce = 10.0f;
+    public float runSpeed = 10.0f;
 
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -24,8 +25,21 @@ public class PlayerMovement : MonoBehaviour
 
     public void HandleMovement()
     {
+        float currentSpeed = moveSpeed;
         float moveInput = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            playerAnimation.SetRunnig(true);
+            currentSpeed = runSpeed;
+        }
+        else
+        {
+            playerAnimation.SetRunnig(false);
+            currentSpeed = moveSpeed;
+        }
+
+        rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
 
         if (playerAnimation != null)
         {

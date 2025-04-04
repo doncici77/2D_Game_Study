@@ -192,5 +192,6 @@ public enum SFXType
     TakeDamage,
     Walk,
     Land,
-    ItemGet
+    ItemGet,
+    Hit
 }

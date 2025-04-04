@@ -19,6 +19,11 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool("IsWalking", iswalking);
     }
 
+    public void SetRunnig(bool isRunnig)
+    {
+        animator.SetBool("IsRun", isRunnig);
+    }
+
     public void SetFalling(bool isFalling)
     {
         animator.SetBool("IsFalling", isFalling);

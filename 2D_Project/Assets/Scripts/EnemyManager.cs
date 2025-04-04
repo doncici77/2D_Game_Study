@@ -24,7 +24,7 @@ public class EnemyManager : MonoBehaviour
 
     IEnumerator ChangeColorTemporatily()
     {
-        // 사운드 메니저 추가
+        SoundManager.Instance.PlaySFX(SFXType.Hit);
         objectRenderer.material.color = Color.red;
         yield return new WaitForSeconds(colorChangeDuration);
         objectRenderer.material.color = originalColor;

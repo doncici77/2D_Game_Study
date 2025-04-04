@@ -55,14 +55,4 @@ public class PlayerAttack : MonoBehaviour
 
         isAttacking = false;
     }
-
-    public void OnAttack()
-    {
-        attackCollider.SetActive(true);
-    }
-
-    public void OffAttack()
-    {
-        attackCollider.SetActive(false);
-    }
 }
