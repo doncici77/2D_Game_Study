@@ -5,55 +5,84 @@ using UnityEngine.UI;
 public class Rope2 : MonoBehaviour
 {
     public Image crossHair;
-    public float circleRadius = 3f; // 원 반지름
-    private Vector3 circleCenter; // 원 중심 좌표
-    private bool isInsideCircle = false;
+    public LayerMask obstacleMask; // 장애물 레이어 마스크
+    public float rotationSpeed = 1.5f;
+
+    private Rigidbody2D rb;
+    private Vector2 circleCenter;
+    private float circleRadius;
+    private bool isCircleActive = false;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     private void Update()
     {
-        // 마우스 위치 변환 (월드 좌표로 변환)
+        // 마우스 포인터 위치 계산
         Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(
             Input.mousePosition.x,
             Input.mousePosition.y,
             Camera.main.nearClipPlane
         ));
-
-        // 크로스헤어 위치 업데이트
         crossHair.transform.position = point;
 
+        // 우클릭으로 원 고정 / 해제
         if (Input.GetButtonDown("Fire2"))
         {
-            int groundLayer = 3; // 감지할 레이어 번호
-            RaycastHit hit;
-            Debug.Log("Fire2 Click");
-
-            if (Physics.Raycast(transform.position, point - transform.position, out hit, Mathf.Infinity, 1 << groundLayer))
+            if (!isCircleActive)
             {
-                Debug.Log("The ray hit the Ground at: " + hit.point);
-
-                // 원 중심 설정
-                circleCenter = hit.point;
-                isInsideCircle = true;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, point - transform.position, Mathf.Infinity, 1 << 3);
+                if (hit.collider != null)
+                {
+                    circleCenter = hit.point;
+                    circleRadius = Vector2.Distance(transform.position, circleCenter);
+                    isCircleActive = true;
+                }
             }
-        }
-
-        if (isInsideCircle)
-        {
-            RestrictPlayerMovement();
+            else
+            {
+                isCircleActive = false;
+            }
         }
     }
 
-    private void RestrictPlayerMovement()
+    private void FixedUpdate()
     {
-        // 플레이어와 원 중심 사이의 벡터 계산
-        Vector3 directionToCenter = transform.position - circleCenter;
-        float distanceToCenter = directionToCenter.magnitude;
-
-        // 플레이어가 원 반지름을 초과하면 위치 조정
-        if (distanceToCenter > circleRadius)
+        if (isCircleActive)
         {
-            Vector3 newPosition = circleCenter + directionToCenter.normalized * circleRadius;
-            transform.position = newPosition;
+            MoveAlongCircleEdgeWithCollision();
+        }
+    }
+
+    private void MoveAlongCircleEdgeWithCollision()
+    {
+        Vector2 direction = (Vector2)transform.position - circleCenter;
+        float currentAngle = Mathf.Atan2(direction.y, direction.x);
+
+        float input = Input.GetAxis("Horizontal");
+        float angleChange = input * rotationSpeed * Time.fixedDeltaTime;
+        float newAngle = currentAngle + angleChange;
+
+        Vector2 targetPos = circleCenter + new Vector2(Mathf.Cos(newAngle), Mathf.Sin(newAngle)) * circleRadius;
+
+        Vector2 moveDirection = targetPos - rb.position;
+
+        // 충돌 검사
+        RaycastHit2D hit = Physics2D.Raycast(rb.position, moveDirection.normalized, moveDirection.magnitude, obstacleMask);
+        if (hit.collider == null)
+        {
+            rb.MovePosition(targetPos); // 충돌 없으면 이동
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (isCircleActive)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(circleCenter, circleRadius);
         }
     }
 }

@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public float shakeMagnitude = 0.1f;
     private Vector3 originalPos;
 
+    [Header("카메라 쉐이크 설정")]
+    public CinemachineImpulseSource impulseSource;
+
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
@@ -81,7 +84,8 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("Enemy"))
         {
-            StartCoroutine(Shake(shakeDuration, shakeMagnitude));
+            //StartCoroutine(Shake(shakeDuration, shakeMagnitude));
+            GenerateCameraImpulse();
         }
     }
 
@@ -109,5 +113,18 @@ public class PlayerController : MonoBehaviour
 
         Camera.main.transform.localPosition = originalPos;
         Camera.main.GetComponent<CinemachineBrain>().enabled = true;
+    }
+
+    private void GenerateCameraImpulse()
+    {
+        if (impulseSource != null)
+        {
+            Debug.Log("카메라 임펄스 발생");
+            impulseSource.GenerateImpulse();
+        }
+        else
+        {
+            Debug.LogWarning("ImpulseSource가 연결이 안되어있습니다.");
+        }
     }
 }

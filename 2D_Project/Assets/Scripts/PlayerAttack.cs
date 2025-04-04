@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public GameObject attackCollider;
     private PlayerAnimation playerAnimation;
     private Animator animator;
     private bool isAttacking = false;
