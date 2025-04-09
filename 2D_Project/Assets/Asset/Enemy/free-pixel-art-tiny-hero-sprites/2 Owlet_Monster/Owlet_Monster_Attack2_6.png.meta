@@ -52,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +66,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -272,7 +272,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Owlet_Monster_Attack2_6_0: -2496056710736330691
+      Owlet_Monster_Attack2_6_1: -8884656175831366720
+      Owlet_Monster_Attack2_6_2: -3490168786560983495
+      Owlet_Monster_Attack2_6_3: -7604848987703052478
+      Owlet_Monster_Attack2_6_4: -4153227177844807328
+      Owlet_Monster_Attack2_6_5: 3040771603119592650
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

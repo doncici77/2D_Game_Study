@@ -89,7 +89,9 @@ public class Tutorial_GrapplingGun : MonoBehaviour
             m_springJoint2D.enabled = false;
 
             if(launchType == LaunchType.Transform_Launch)
+            {
                 m_rigidbody.gravityScale = 1;
+            }
         }
         else
         {

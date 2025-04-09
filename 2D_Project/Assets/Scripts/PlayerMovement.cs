@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAnimation playerAnimation;
     private float localScaleX;
 
+    private bool isGrapple = false;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,6 +29,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float currentSpeed = moveSpeed;
         float moveInput = Input.GetAxis("Horizontal");
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            isGrapple = true;
+        }
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -39,7 +46,11 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = moveSpeed;
         }
 
-        rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
+        Debug.Log("isGrapple" + isGrapple);
+        if (isGrapple == false) // 그래플링 중이 아닐 때만 이동
+        {
+            rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
+        }
 
         if (playerAnimation != null)
         {
@@ -74,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         else if (isGrounded) //착지상태
         {
             playerAnimation?.PlayLanding();
+            isGrapple = false;
         }
     }
 }

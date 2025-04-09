@@ -8,6 +8,13 @@ public class PlayerController : MonoBehaviour
     private PlayerAttack attack;
     private PlayerHealth health;
 
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private bool isInvincible = false;
+    public float invincibilityDuration = 1.0f;
+    public float knockbackForce = 5.0f;
+    private Rigidbody2D rb;
+
     private Vector3 startPlayerPos;
     private bool isPaused = false;
     public GameObject pauseMenuUI;
@@ -24,6 +31,9 @@ public class PlayerController : MonoBehaviour
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
         health = GetComponent<PlayerHealth>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Start()
@@ -38,12 +48,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("!Input.GetKeyDown(KeyCode.Mouse1) || !Input.GetKey(KeyCode.Mouse1)" + (!Input.GetKeyDown(KeyCode.Mouse1) || !Input.GetKey(KeyCode.Mouse1)));
-        if (!Input.GetKeyDown(KeyCode.Mouse1) || !Input.GetKey(KeyCode.Mouse1))
-        {
-            movement.HandleMovement();
-            attack.PerformAttack();
-        }
+        movement.HandleMovement();
+        attack.PerformAttack();
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -74,22 +80,34 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Coin"))
+        if (collision.CompareTag("Coin"))
         {
             GameManager.instance.AddCoin(10);
             Destroy(collision.gameObject);
         }
-        
-        if(collision.CompareTag("DeathZone"))
+
+        if (collision.CompareTag("DeathZone"))
         {
             SoundManager.Instance.PlaySFX(SFXType.TakeDamage);
             transform.position = startPlayerPos;
         }
 
-        if(collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy"))
         {
             //StartCoroutine(Shake(shakeDuration, shakeMagnitude));
             GenerateCameraImpulse();
+        }
+    }
+
+    public void TakeDamage()
+    {
+        if (!isInvincible)
+        {
+            SoundManager.Instance.PlaySFX(SFXType.Hit);
+            animator.SetTrigger("Hit");
+            Vector2 knockbackDirection = transform.localScale.x < 0 ? Vector2.right : Vector2.left;
+            rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            StartCoroutine(Invincibility());
         }
     }
 
@@ -130,5 +148,26 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogWarning("ImpulseSource가 연결이 안되어있습니다.");
         }
+    }
+
+    IEnumerator Invincibility()
+    {
+        isInvincible = true;
+
+        float elapsedTime = 0f;
+        float blinkInterval = 0.2f;
+
+        Color originalColor = spriteRenderer.color;
+
+        while (elapsedTime < invincibilityDuration)
+        {
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.4f);
+            yield return new WaitForSeconds(blinkInterval);
+            spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1.0f);
+            yield return new WaitForSeconds(blinkInterval);
+            elapsedTime += blinkInterval * 2;
+        }
+        spriteRenderer.color = originalColor;
+        isInvincible = false;
     }
 }
