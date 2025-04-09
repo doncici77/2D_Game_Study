@@ -8993,8 +8993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7e6e1bca9cd4343bc489e2314511e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAttackEffectPrefab: {fileID: 2896991914679615109, guid: a050e1ede17c0f145bb4a685b47f0eec, type: 3}
-  playerDamageEffectPrefab: {fileID: 4208719155666338567, guid: ab7785b51bef81046a906647ad6aaed9, type: 3}
+  playerAttackEffectPrefab: {fileID: 2149811710499471747, guid: dbde616187fba1d4ba79243399d01189, type: 3}
+  playerDamageEffectPrefab: {fileID: 31075393638486406, guid: 5bb6e62d7b24ac241beb15e20daf7ced, type: 3}
   poolSize: 10
 --- !u!4 &1323932310
 Transform:

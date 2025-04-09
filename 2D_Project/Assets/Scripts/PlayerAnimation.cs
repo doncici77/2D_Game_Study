@@ -51,11 +51,11 @@ public class PlayerAnimation : MonoBehaviour
         SoundManager.Instance.PlaySFX(SFXType.Attack);
         if (transform.localScale.x == -6)
         {
-            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerAttack, new Vector3(transform.position.x - 1.2f, transform.position.y, transform.position.z), new Vector3(-3, 3, 3));
+            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerAttack, new Vector3(transform.position.x - 1.2f, transform.position.y, transform.position.z), new Vector3(-5, 5, 5));
         }
         else
         {
-            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerAttack, new Vector3(transform.position.x + 1.2f, transform.position.y, transform.position.z), new Vector3(3, 3, 3));
+            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerAttack, new Vector3(transform.position.x + 1.2f, transform.position.y, transform.position.z), new Vector3(5, 5, 5));
         }
     }
 

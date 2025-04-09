@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
             GenerateCameraImpulse();
             SoundManager.Instance.PlaySFX(SFXType.TakeDamage);
             animator.SetTrigger("Hit");
-            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerDamage, transform.position, new Vector3(3, 3, 3));
+            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerDamage, transform.position, new Vector3(6, 6, 6));
             StartCoroutine(Invincibility());
 
             Vector2 knockbackDirection = transform.localScale.x < 0 ? Vector2.right : Vector2.left;
