@@ -82,6 +82,11 @@ public class SoundManager : MonoBehaviour
             SetBGMVolume(0.5f);
             PlayBGM(BGMType.Tutorial, 1f);
         }
+        else if(scene.name == "Menu")
+        {
+            SetBGMVolume(0.5f);
+            PlayBGM(BGMType.Menu, 1f);
+        }
         else if (scene.name == "Boss")
         {
             PlayBGM(BGMType.Boss, 1f);
@@ -182,7 +187,8 @@ public class SoundManager : MonoBehaviour
 public enum BGMType
 {
     Boss, 
-    Tutorial
+    Tutorial,
+    Menu
 }
 
 public enum SFXType
