@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
 
     public float delayTime = 0.3f;
 
+    private bool canGoingNextScene = false;
+    private string nextSceneName;
+
     [Header("카메라 쉐이크 설정")]
     public CinemachineImpulseSource impulseSource;
 
@@ -58,6 +61,11 @@ public class PlayerController : MonoBehaviour
         }
 
         attack.PerformAttack();
+
+        if(Input.GetKeyDown(KeyCode.W) && canGoingNextScene)
+        {
+            SceneController.Instance.StartSeneTransition(nextSceneName);
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -100,9 +108,18 @@ public class PlayerController : MonoBehaviour
             transform.position = startPlayerPos;
         }
 
-        if (collision.CompareTag("Enemy"))
+        if(collision.CompareTag("Portal"))
         {
-            //StartCoroutine(Shake(shakeDuration, shakeMagnitude));
+            canGoingNextScene = true;
+            nextSceneName = collision.gameObject.name;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Portal"))
+        {
+            canGoingNextScene = false;
         }
     }
 
