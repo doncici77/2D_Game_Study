@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 10.0f;
 
     private Rigidbody2D rb;
-    private bool isGrounded;
+    public bool isGrounded;
 
     [Header("Ground Check")]
     public Transform groundCheck;
@@ -30,62 +30,76 @@ public class PlayerMovement : MonoBehaviour
         float currentSpeed = moveSpeed;
         float moveInput = Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        HandlePlayerMove(moveInput, ref currentSpeed);
+        HandlePlayerAnimation(moveInput);
+    }
+
+    private void HandlePlayerMove(float moveInput, ref float currentSpeed)
+    {
+        // 그래플 상태 갱신
+        if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKey(KeyCode.Mouse1))
         {
             isGrapple = true;
         }
 
+        // 달리기
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            playerAnimation.SetRunnig(true);
             currentSpeed = runSpeed;
         }
         else
         {
-            playerAnimation.SetRunnig(false);
             currentSpeed = moveSpeed;
         }
 
-        Debug.Log("isGrapple" + isGrapple);
-        if (isGrapple == false) // 그래플링 중이 아닐 때만 이동
+        // 이동 방향 반영
+        if (moveInput != 0)
+        {
+            float scaleX = moveInput < 0 ? -6 : 6;
+            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
+        }
+
+        // 그래플 중이 아닐 때만 이동 가능
+        if (!isGrapple)
         {
             rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
         }
 
-        if (playerAnimation != null)
-        {
-            playerAnimation.SetWalking(moveInput != 0);
-        }
-
-        if(moveInput != 0)
-        {
-            if(moveInput < 0)
-            {
-                transform.localScale = new Vector3(-6, transform.localScale.y, transform.localScale.z);
-            }
-            else
-            {
-                transform.localScale = new Vector3(6, transform.localScale.y, transform.localScale.z);
-            }
-        }
-
+        // 점프
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (Input.GetButtonDown("Jump") && isGrounded) //점프애니메이션
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            playerAnimation.SetJumping(true);   
-            Debug.Log("점프시작");
         }
+    }
 
-        else if (!isGrounded && rb.linearVelocity.y < -0.1f) //낙하상태
+    private void HandlePlayerAnimation(float moveInput)
+    {
+        if (playerAnimation == null) return;
+
+        // 걷기 & 달리기
+        playerAnimation.SetWalking(moveInput != 0);
+        playerAnimation.SetRunnig(Input.GetKey(KeyCode.LeftShift));
+
+        // 점프 / 낙하 / 착지
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            playerAnimation?.SetFalling(true);
+            playerAnimation.SetJumping(true);
         }
-
-        else if (isGrounded) //착지상태
+        else if (!isGrounded && rb.linearVelocity.y < -0.1f)
         {
-            playerAnimation?.PlayLanding();
+            playerAnimation.SetFalling(true);
+        }
+        else if (isGrounded && !Input.GetKey(KeyCode.Mouse1))
+        {
+            playerAnimation.PlayLanding();
             isGrapple = false;
+        }
+
+        // 그래플 중일 때도 낙하 처리
+        if (isGrapple && Input.GetKey(KeyCode.Mouse1))
+        {
+            playerAnimation.SetFalling(true);
         }
     }
 }

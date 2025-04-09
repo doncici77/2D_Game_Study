@@ -23,7 +23,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
 
     [Header("Rotation:")]
     [SerializeField] private bool rotateOverTime = true;
-    [Range(0, 60)] [SerializeField] private float rotationSpeed = 4;
+    [Range(0, 60)][SerializeField] private float rotationSpeed = 4;
 
     [Header("Distance:")]
     [SerializeField] private bool hasMaxDistance = false;
@@ -48,6 +48,10 @@ public class Tutorial_GrapplingGun : MonoBehaviour
     [HideInInspector] public Vector2 grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
 
+    public PlayerMovement playerMovement;
+    public float impulseForce = 5f; // 순간 힘의 세기
+    private bool canImpulse = true;
+
     private void Start()
     {
         grappleRope.enabled = false;
@@ -64,13 +68,27 @@ public class Tutorial_GrapplingGun : MonoBehaviour
         else if (Input.GetKey(KeyCode.Mouse1))
         {
             if (grappleRope.enabled)
-            { 
+            {
                 RotateGun(grapplePoint, false);
+
+                // E 키: 오른쪽 방향으로 힘
+                if (Input.GetKeyDown(KeyCode.E) && canImpulse)
+                {
+                    m_rigidbody.AddForce(Vector2.right * impulseForce, ForceMode2D.Impulse);
+                    canImpulse = false;
+                }
+
+                // Q 키: 왼쪽 방향으로 힘
+                if (Input.GetKeyDown(KeyCode.Q) && canImpulse)
+                {
+                    m_rigidbody.AddForce(Vector2.left * impulseForce, ForceMode2D.Impulse);
+                    canImpulse = false;
+                }
             }
             else
             {
                 Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-                RotateGun(mousePos, true); 
+                RotateGun(mousePos, true);
             }
 
             if (launchToPoint && grappleRope.isGrappling)
@@ -80,7 +98,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
                     Vector2 firePointDistnace = firePoint.position - gunHolder.localPosition;
                     Vector2 targetPos = grapplePoint - firePointDistnace;
                     gunHolder.position = Vector2.Lerp(gunHolder.position, targetPos, Time.deltaTime * launchSpeed);
-                }  
+                }
             }
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1))
@@ -88,16 +106,19 @@ public class Tutorial_GrapplingGun : MonoBehaviour
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
 
-            if(launchType == LaunchType.Transform_Launch)
+            if (launchType == LaunchType.Transform_Launch)
             {
                 m_rigidbody.gravityScale = 1;
             }
+
+            canImpulse = true;
         }
         else
         {
             Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
             RotateGun(mousePos, true);
         }
+
     }
 
     void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
@@ -138,7 +159,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
     public void Grapple()
     {
         m_springJoint2D.autoConfigureDistance = false;
-        
+
         if (!launchToPoint && !autoConfigureDistance)
         {
             m_springJoint2D.distance = targetDistance;
@@ -184,6 +205,5 @@ public class Tutorial_GrapplingGun : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(firePoint.position, maxDistnace);
         }
-    }
-
+    }   
 }
