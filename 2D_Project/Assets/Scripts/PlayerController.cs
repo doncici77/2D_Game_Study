@@ -111,8 +111,9 @@ public class PlayerController : MonoBehaviour
         if (!isInvincible)
         {
             GenerateCameraImpulse();
-            SoundManager.Instance.PlaySFX(SFXType.Hit);
+            SoundManager.Instance.PlaySFX(SFXType.TakeDamage);
             animator.SetTrigger("Hit");
+            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerDamage, transform.position, new Vector3(3, 3, 3));
             StartCoroutine(Invincibility());
 
             Vector2 knockbackDirection = transform.localScale.x < 0 ? Vector2.right : Vector2.left;
