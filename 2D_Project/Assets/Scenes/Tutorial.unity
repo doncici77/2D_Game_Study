@@ -8601,6 +8601,7 @@ MonoBehaviour:
   gunPivot: {fileID: 1930050603}
   firePoint: {fileID: 1796363382}
   m_springJoint2D: {fileID: 8569051614555058447}
+  m_rigidbody: {fileID: 0}
   rotateOverTime: 0
   rotationSpeed: 17.6
   hasMaxDistance: 1
@@ -10894,9 +10895,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   invincibilityDuration: 1
   knockbackForce: 5
+  knockbackDuration: 0.2
   pauseMenuUI: {fileID: 676229026}
   shakeDuration: 0.5
   shakeMagnitude: 0.05
+  delayTime: 0.15
   impulseSource: {fileID: 354876025}
 --- !u!1 &4315556217815573687
 GameObject:

@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float invincibilityDuration = 1.0f;
     public float knockbackForce = 5.0f;
     private Rigidbody2D rb;
+    private bool isKnockback = false;
+    public float knockbackDuration = 0.2f;
 
     private Vector3 startPlayerPos;
     private bool isPaused = false;
@@ -22,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public float shakeDuration = 0.5f;
     public float shakeMagnitude = 0.1f;
     private Vector3 originalPos;
+
+    public float delayTime = 0.3f;
 
     [Header("카메라 쉐이크 설정")]
     public CinemachineImpulseSource impulseSource;
@@ -48,7 +52,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        movement.HandleMovement();
+        if (!isKnockback)
+        {
+            movement.HandleMovement();
+        }
+
         attack.PerformAttack();
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -95,7 +103,6 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             //StartCoroutine(Shake(shakeDuration, shakeMagnitude));
-            GenerateCameraImpulse();
         }
     }
 
@@ -103,12 +110,29 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvincible)
         {
+            GenerateCameraImpulse();
             SoundManager.Instance.PlaySFX(SFXType.Hit);
             animator.SetTrigger("Hit");
-            Vector2 knockbackDirection = transform.localScale.x < 0 ? Vector2.right : Vector2.left;
-            rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
             StartCoroutine(Invincibility());
+
+            Vector2 knockbackDirection = transform.localScale.x < 0 ? Vector2.right : Vector2.left;
+            rb.linearVelocity = Vector2.zero;
+            rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
+            StartCoroutine(KnockbackCoroutine());
         }
+    }
+
+    public void TakeAttack()
+    {
+        StartCoroutine(DelayTime());
+        GenerateCameraImpulse();
+    }
+
+    IEnumerator DelayTime()
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(delayTime);
+        Time.timeScale = 1f;
     }
 
     public IEnumerator Shake(float duration, float magnitude)
@@ -159,6 +183,8 @@ public class PlayerController : MonoBehaviour
 
         Color originalColor = spriteRenderer.color;
 
+        StartCoroutine(DelayTime());
+
         while (elapsedTime < invincibilityDuration)
         {
             spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.4f);
@@ -169,5 +195,12 @@ public class PlayerController : MonoBehaviour
         }
         spriteRenderer.color = originalColor;
         isInvincible = false;
+    }
+
+    IEnumerator KnockbackCoroutine()
+    {
+        isKnockback = true;
+        yield return new WaitForSeconds(knockbackDuration);
+        isKnockback = false;
     }
 }

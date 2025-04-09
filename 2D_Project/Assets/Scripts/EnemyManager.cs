@@ -71,6 +71,7 @@ public class EnemyManager : MonoBehaviour
         if (collision.CompareTag("PlayerAttack"))
         {
             StartCoroutine(ChangeColorTemporatily());
+            collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
         }
         else if(collision.CompareTag("Player"))
         {
