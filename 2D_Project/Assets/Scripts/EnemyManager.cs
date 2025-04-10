@@ -4,7 +4,14 @@ using UnityEngine;
 public enum EnemyType
 {
     None,
-    Enemy
+    Enemy,
+    Enemy2,
+    Enemy3
+}
+
+public enum StateType
+{
+    Idle, PatrolWalk, PatrolRun, ChaseWalk, ChaseRun, StrongAttack, Attack
 }
 
 public class EnemyManager : MonoBehaviour
@@ -12,26 +19,37 @@ public class EnemyManager : MonoBehaviour
     private Color originalColor;
     private Renderer objectRenderer;
     public float colorChangeDuration = 0.5f;
-    private float zombieHp = 10.0f;
     public float speed = 2.0f;
+    public float Hp = 1;
+    public float Damage = 1;
     public float maxDistance = 3.0f;
     private Vector3 startPos;
     private int direction = 1;
     public GroundType currentGroundType;
     public EnemyType monsterType = EnemyType.None;
+    public StateType stateType = StateType.Idle;
 
     void Start()
     {
         objectRenderer = GetComponent<SpriteRenderer>();
         originalColor = objectRenderer.material.color;
         startPos = transform.position;
+        int randomChoice = Random.Range(0, 1);
+        if (randomChoice == 0)
+        {
+            stateType = StateType.PatrolWalk;
+        }
+        else
+        {
+            stateType = StateType.PatrolRun;
+        }
     }
 
     private void Update()
     {
         if (monsterType != EnemyType.None)
         {
-            if (currentGroundType == GroundType.UpGround)
+            if (currentGroundType == GroundType.UpGround && stateType == StateType.PatrolWalk)
             {
                 if (transform.position.y > startPos.y + maxDistance)
                 {
@@ -40,6 +58,21 @@ public class EnemyManager : MonoBehaviour
                 else if (transform.position.y < startPos.y - maxDistance)
                 {
                     direction = 1;
+                }
+
+                transform.position += new Vector3(0, speed * direction * Time.deltaTime, 0);
+            }
+            else if (currentGroundType == GroundType.UpGround && stateType == StateType.PatrolRun)
+            {
+                if (transform.position.y > startPos.y + maxDistance)
+                {
+                    direction = -1;
+                    speed *= 2;
+                }
+                else if (transform.position.y < startPos.y - maxDistance)
+                {
+                    direction = 1;
+                    speed *= 2;
                 }
 
                 transform.position += new Vector3(0, speed * direction * Time.deltaTime, 0);
@@ -62,8 +95,6 @@ public class EnemyManager : MonoBehaviour
                 transform.position += new Vector3(speed * direction * Time.deltaTime, 0, 0);
             }
         }
-
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

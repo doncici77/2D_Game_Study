@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public enum MonsterType
+public enum EMonsterType
 {
     Mon1,
     Mon2,
     Mon3
 }
 
+
 public class AIManager : MonoBehaviour
 {
-    public GameObject[] enemyPrefab;
-    public float spawnRangeX = 10.0f; // 스폰 범위
+    public GameObject monsterPrefab;
+    public float spawnRangeX = 10.0f;
     public float spawnRangeY = 5.0f;
     public int enemyCount = 5;
     public Transform[] spawnPoints;
-    private float enemySpeed = 1.0f;
-    public MonsterType enemyType;
+    private float monsterSpeed = 1.0f;
+    private EMonsterType currentMonsterType = EMonsterType.Mon1;
+    private float monsterHp = 1;
+    private float monsterDamage = 1;
 
     void Start()
     {
@@ -24,51 +27,68 @@ public class AIManager : MonoBehaviour
 
     void SpawnEnemies()
     {
-        for(int i = 0; i < enemyCount; i++)
+        for (int i = 0; i < enemyCount; i++)
         {
-            if(spawnPoints.Length > 0)
+            if (spawnPoints.Length > 0)
             {
                 int randomIndex = Random.Range(0, spawnPoints.Length);
                 Vector2 spawnPosition = spawnPoints[randomIndex].position;
-                MonsterSetState();
-                Instantiate(enemyPrefab[(int)enemyType], spawnPosition, Quaternion.identity);
+                Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
             }
             else
             {
-                float randomX = Random.Range(-spawnRangeX, spawnRangeY);
-                float randomY = Random.Range(-spawnRangeX, spawnRangeY);
+                float randomX = Random.Range(-spawnRangeX, spawnRangeX);
+                float randomY = Random.Range(-spawnRangeY, spawnRangeY);
                 Vector2 randomPosition = new Vector2(randomX, randomY);
-                MonsterSetState();
-                Instantiate(enemyPrefab[(int)enemyType], randomPosition, Quaternion.identity);
+                Instantiate(monsterPrefab, randomPosition, Quaternion.identity);
             }
-            Debug.Log("(int)enemyType : " + (int)enemyType);
         }
     }
 
+
     void MonsterSetState()
     {
-        EnemyManager enemy = enemyPrefab[(int)enemyType].GetComponent<EnemyManager>();
-        float minSpeed = 1.0f;
-        float maxSpeed = 10.0f;
+        EnemyManager monster = monsterPrefab.GetComponent<EnemyManager>();
+        float minSpeed = 1f;
+        float maxSpeed = 10f;
+        float minHp = 1f;
+        float maxHp = 10f;
+        float minDamage = 1f;
+        float maxDamage = 10f;
 
-        if(enemyType == MonsterType.Mon1)
+        if (currentMonsterType == EMonsterType.Mon1)
         {
-            minSpeed = 1.0f;
-            maxSpeed = 5f;
+            minSpeed = 1;
+            maxSpeed = 5;
+            minHp = 1;
+            maxHp = 10;
+            minDamage = 1;
+            maxDamage = 10;
         }
-        else if (enemyType == MonsterType.Mon2)
+        else if (currentMonsterType == EMonsterType.Mon2)
         {
-            minSpeed = 1.0f;
-            maxSpeed = 2f;
+            minSpeed = 0.5f;
+            maxSpeed = 3.0f;
+            minHp = 5;
+            maxHp = 12;
+            minDamage = 3;
+            maxDamage = 12;
         }
-        else if (enemyType == MonsterType.Mon3)
+        else if (currentMonsterType == EMonsterType.Mon3)
         {
-            minSpeed = 1.0f;
-            maxSpeed = 5f;
+            minSpeed = 3.0f;
+            maxSpeed = 7.0f;
+            minHp = 1;
+            maxHp = 5;
+            minDamage = 1;
+            maxDamage = 3;
         }
-
-        enemySpeed = Random.Range(minSpeed, maxSpeed);
-        enemy.speed = enemySpeed;
+        monsterSpeed = Random.Range(minSpeed, maxSpeed);
+        monsterHp = Random.Range(minHp, maxHp);
+        monsterDamage = Random.Range(minDamage, maxDamage);
+        monster.speed = monsterSpeed;
+        monster.Hp = monsterHp;
+        monster.Damage = monsterDamage;
     }
 
     private void OnDrawGizmosSelected()
