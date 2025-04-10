@@ -9,6 +9,8 @@ public class PlayerAttack : MonoBehaviour
     private PlayerAnimation playerAnimation;
     private Animator animator;
     private bool isAttacking = false;
+    public Camera m_camera;
+    public Transform attackPivot;
 
     [Header("애니메이션 상태 이름")]
     public string attackStateName = "Player_Attack";
@@ -17,6 +19,26 @@ public class PlayerAttack : MonoBehaviour
     {
         playerAnimation = GetComponent<PlayerAnimation>();
         animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
+        RotateGun(mousePos);
+    }
+
+    void RotateGun(Vector3 lookPoint)
+    {
+        Vector3 distanceVector = lookPoint - attackPivot.position;
+
+        float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
+
+        if (transform.localScale.x < 0)
+        {
+            angle += 180f;
+        }
+
+        attackPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     public void PerformAttack()

@@ -63,6 +63,29 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
+    public void ParticlePlay(ParticleType type, Vector3 position, Vector3 scale, Vector3 rotate)
+    {
+        if (particlePools.ContainsKey(type))
+        {
+            GameObject particleObj = particlePools[type].Dequeue();
+
+            if (particleObj != null)
+            {
+                particleObj.transform.position = position;
+                particleObj.transform.eulerAngles = rotate;
+                particleObj.transform.localScale = scale;
+                particleObj.SetActive(true);
+
+                Animator animator = particleObj.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    animator.Play(0);
+                    StartCoroutine(AnimationEndCoroutine(type, particleObj, animator));
+                }
+            }
+        }
+    }
+
     IEnumerator AnimationEndCoroutine(ParticleType type, GameObject obj, Animator animator)
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);

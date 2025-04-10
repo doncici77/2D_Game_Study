@@ -163,6 +163,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorChangeDuration: 0.5
   speed: 2
+  Hp: 1
+  Damage: 1
   maxDistance: 3
   currentGroundType: 1
   monsterType: 1
+  stateType: 0
+  player: {fileID: 0}
+  chaseRange: 5
+  attackRange: 1.5
+  isAttacking: 0

@@ -18,11 +18,19 @@ public class PlayerMovement : MonoBehaviour
     private float localScaleX;
 
     private bool isGrapple = false;
+    private Vector3 point;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
+    }
+
+    private void Update()
+    {
+        Vector3 point = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+        bool isRight = point.x > transform.position.x;
+        transform.localScale = new Vector3(isRight ? 6 : -6, transform.localScale.y, transform.localScale.z);
     }
 
     public void HandleMovement()
@@ -50,13 +58,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             currentSpeed = moveSpeed;
-        }
-
-        // 이동 방향 반영
-        if (moveInput != 0)
-        {
-            float scaleX = moveInput < 0 ? -6 : 6;
-            transform.localScale = new Vector3(scaleX, transform.localScale.y, transform.localScale.z);
         }
 
         // 그래플 중이 아닐 때만 이동 가능

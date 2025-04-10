@@ -89,6 +89,7 @@ public class AIManager : MonoBehaviour
         monster.speed = monsterSpeed;
         monster.Hp = monsterHp;
         monster.Damage = monsterDamage;
+
     }
 
     private void OnDrawGizmosSelected()
