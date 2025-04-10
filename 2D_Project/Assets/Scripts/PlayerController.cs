@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("Portal"))
         {
-            canGoingNextScene = true;
             nextSceneName = collision.gameObject.name;
+            canGoingNextScene = true;
         }
     }
 
