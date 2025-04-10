@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    private bool isInvincible = false;
+    public bool isInvincible = false;
     public float invincibilityDuration = 1.0f;
     public float knockbackForce = 5.0f;
     private Rigidbody2D rb;

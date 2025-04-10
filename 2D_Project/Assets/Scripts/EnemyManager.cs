@@ -20,7 +20,8 @@ public class EnemyManager : MonoBehaviour
     private Renderer objectRenderer;
     public float colorChangeDuration = 0.5f;
     public float speed = 2.0f;
-    public float Hp = 1;
+    public float Hp = 10;
+    public float maxHp = 10;
     public float Damage = 1;
     public float maxDistance = 3.0f;
     private Vector3 startPos;
@@ -37,8 +38,11 @@ public class EnemyManager : MonoBehaviour
     private float stateChanageInterval = 3.0f;
     private Coroutine stateChangeRoutine;
 
+    private HealthBar healthBar;
+
     void Start()
     {
+        healthBar = GetComponentInChildren<HealthBar>();
         objectRenderer = GetComponent<SpriteRenderer>();
         originalColor = objectRenderer.material.color;
         startPos = transform.position;
@@ -144,6 +148,8 @@ public class EnemyManager : MonoBehaviour
         {
             StartCoroutine(ChangeColorTemporatily());
             collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
+            Hp -= 1;
+            healthBar.UpdateHealthBar(Hp, maxHp);
         }
         else if(collision.CompareTag("Player"))
         {
