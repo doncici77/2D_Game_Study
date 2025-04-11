@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 802022671627468050}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.3, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66,7 +66,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 60.381737, y: -0.805254}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,7 +76,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 138.37706, y: 48.28619}
+  m_Size: {x: 60, y: 40}
   m_EdgeRadius: 0
 --- !u!1 &2072671997802259153
 GameObject:
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 4656844851642183130}
   m_Layer: 0
   m_Name: Square (1)
-  m_TagString: Untagged
+  m_TagString: LeftPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,7 +105,7 @@ Transform:
   m_GameObject: {fileID: 2072671997802259153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.916, y: -2.0146, z: 0}
+  m_LocalPosition: {x: -24.616001, y: -3.1146002, z: 0}
   m_LocalScale: {x: 2.3495233, y: 5.9895635, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -196,7 +196,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 3823394411923613012}
   m_Layer: 0
   m_Name: Square (2)
-  m_TagString: Untagged
+  m_TagString: RightPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -239,7 +239,7 @@ Transform:
   m_GameObject: {fileID: 5894699169294648467}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.260002, y: -2.0146, z: 0}
+  m_LocalPosition: {x: 24.560001, y: -3.1146002, z: 0}
   m_LocalScale: {x: 2.3495233, y: 5.9895635, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -330,7 +330,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -355,7 +355,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7419667488133045893}
-  - component: {fileID: 1906222766547488401}
   m_Layer: 0
   m_Name: Map1
   m_TagString: Untagged
@@ -383,23 +382,6 @@ Transform:
   - {fileID: 5035079411349866270}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1906222766547488401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6244276965524714279}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f723cad7ea25a4d8b4ed35afcfed1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entryPoints:
-  - {fileID: 6774519885661936453}
-  - {fileID: 8685018122660987072}
-  roomType: 0
-  roomSize: {x: 60, y: 30}
 --- !u!1 &6255597879602603414
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +407,7 @@ Transform:
   m_GameObject: {fileID: 6255597879602603414}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.3, y: -3.64, z: 0}
+  m_LocalPosition: {x: -19, y: -4.7400002, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -443,7 +425,7 @@ GameObject:
   - component: {fileID: 8624713258284552896}
   - component: {fileID: 2065025078833285547}
   - component: {fileID: 4248604289112356763}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8963,7 +8945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4269998412165168757}
   - component: {fileID: 7269375636675963050}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8979,7 +8961,7 @@ Transform:
   m_GameObject: {fileID: 7067913948356315431}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.3, y: 0, z: 0}
+  m_LocalPosition: {x: -18, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

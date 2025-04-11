@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     [Header("카메라 쉐이크 설정")]
     public CinemachineImpulseSource impulseSource;
 
+    public DungeonGenerator dungeonGenerator;
+
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
@@ -116,11 +118,11 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("LeftPortal"))
         {
-            collision.gameObject.GetComponentInParent<DungeonGenerator>().GenerateDungeon(PortalDir.left);
+            dungeonGenerator.GenerateDungeon(PortalDir.left);
         }
-        if (collision.CompareTag("RightPortal"))
+        else if (collision.CompareTag("RightPortal"))
         {
-            collision.gameObject.GetComponentInParent<DungeonGenerator>().GenerateDungeon(PortalDir.right);
+            dungeonGenerator.GenerateDungeon(PortalDir.right);
         }
     }
 
