@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum EnemyType
@@ -148,10 +149,25 @@ public class EnemyManager : MonoBehaviour
         {
             StartCoroutine(ChangeColorTemporatily());
             collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
-            Hp -= 1;
+            if(Hp > 1)
+            {
+                Hp -= 1;
+            }
+            else
+            {
+                Hp = 0;
+            }
             healthBar.UpdateHealthBar(Hp, maxHp);
         }
-        else if(collision.CompareTag("Player"))
+        else if (collision.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage();
         }

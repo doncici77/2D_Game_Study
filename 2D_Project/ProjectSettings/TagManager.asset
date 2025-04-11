@@ -11,6 +11,8 @@ TagManager:
   - PlayerAttack
   - Enemy
   - Portal
+  - LeftPortal
+  - RightPortal
   layers:
   - Default
   - TransparentFX

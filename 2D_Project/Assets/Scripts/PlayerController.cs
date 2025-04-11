@@ -113,6 +113,15 @@ public class PlayerController : MonoBehaviour
             nextSceneName = collision.gameObject.name;
             canGoingNextScene = true;
         }
+
+        if(collision.CompareTag("LeftPortal"))
+        {
+            collision.gameObject.GetComponentInParent<DungeonGenerator>().GenerateDungeon(PortalDir.left);
+        }
+        if (collision.CompareTag("RightPortal"))
+        {
+            collision.gameObject.GetComponentInParent<DungeonGenerator>().GenerateDungeon(PortalDir.right);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
