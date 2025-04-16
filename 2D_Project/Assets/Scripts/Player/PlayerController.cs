@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerMovement movement;
     private PlayerAttack attack;
-    private PlayerHealth health;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -39,7 +38,6 @@ public class PlayerController : MonoBehaviour
     {
         movement = GetComponent<PlayerMovement>();
         attack = GetComponent<PlayerAttack>();
-        health = GetComponent<PlayerHealth>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -148,6 +146,8 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
             StartCoroutine(KnockbackCoroutine());
+
+            PlayerStats.Instance.TakeDamage(10);
         }
     }
 

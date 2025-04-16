@@ -1,5 +1,17 @@
 using UnityEngine;
 
+public enum SkillType
+{
+    Dash,
+    Grappling
+}
+
+public enum WeaponType
+{
+    Short,
+    Long
+}
+
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats Instance;
@@ -10,6 +22,8 @@ public class PlayerStats : MonoBehaviour
     public int damage = 10;
     public float attackSpeed = 1.0f;
     public float moveSpeed = 3.0f;
+    public SkillType skillType = SkillType.Grappling;
+    public WeaponType weaponType = WeaponType.Short;
 
     private void Awake()
     {
@@ -31,8 +45,6 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        SoundManager.Instance.PlaySFX(SFXType.TakeDamage);
-        // 애니메이션 재생
         currentHp -= amount;
 
         if(currentHp <= 0)

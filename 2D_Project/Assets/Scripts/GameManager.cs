@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
 
     public int coinCount = 0;
 
-    public Text coinText;
-
     private const string COIN_KEY = "CoinCount";
     private const string DAMAGE_KEY = "PlayerDamage";
     private const string ATTACK_SPEED_KEY = "PlayerAttackSpeed";
@@ -31,7 +29,6 @@ public class GameManager : MonoBehaviour
     public void AddCoin(int amount)
     {
         coinCount += amount;
-        coinText.text = "코인 : " + coinCount.ToString();
         SaveCoin();
         SoundManager.Instance.PlaySFX(SFXType.ItemGet);
     }
@@ -97,6 +94,5 @@ public class GameManager : MonoBehaviour
     public void ResetCoin()
     {
         coinCount = 0;
-        coinText.text = "코인 : " + coinCount.ToString();
     }
 }
