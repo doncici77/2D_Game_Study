@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public enum EMonsterType
+public enum EnemyType
 {
-    Mon1,
-    Mon2,
-    Mon3
+    None,
+    Enemy1,
+    Enemy2,
+    Enemy3
 }
-
 
 public class AIManager : MonoBehaviour
 {
@@ -15,10 +15,7 @@ public class AIManager : MonoBehaviour
     public float spawnRangeY = 5.0f;
     public int enemyCount = 5;
     public Transform[] spawnPoints;
-    private float monsterSpeed = 1.0f;
-    private EMonsterType currentMonsterType = EMonsterType.Mon1;
-    private float monsterHp = 1;
-    private float monsterDamage = 1;
+    public EnemyType currentMonsterType = EnemyType.Enemy1;
 
     void Start()
     {
@@ -29,67 +26,55 @@ public class AIManager : MonoBehaviour
     {
         for (int i = 0; i < enemyCount; i++)
         {
+            Vector2 spawnPosition;
             if (spawnPoints.Length > 0)
             {
                 int randomIndex = Random.Range(0, spawnPoints.Length);
-                Vector2 spawnPosition = spawnPoints[randomIndex].position;
-                Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
+                spawnPosition = spawnPoints[randomIndex].position;
             }
             else
             {
                 float randomX = Random.Range(-spawnRangeX, spawnRangeX);
                 float randomY = Random.Range(-spawnRangeY, spawnRangeY);
-                Vector2 randomPosition = new Vector2(randomX, randomY);
-                Instantiate(monsterPrefab, randomPosition, Quaternion.identity);
+                spawnPosition = new Vector2(randomX, randomY);
             }
+
+            GameObject monsterObj = Instantiate(monsterPrefab, spawnPosition, Quaternion.identity);
+            EnemyManager enemy = monsterObj.GetComponent<EnemyManager>();
+            SetMonsterStats(enemy);
         }
     }
 
-
-    void MonsterSetState()
+    void SetMonsterStats(EnemyManager monster)
     {
-        EnemyManager monster = monsterPrefab.GetComponent<EnemyManager>();
-        float minSpeed = 1f;
-        float maxSpeed = 10f;
-        float minHp = 1f;
-        float maxHp = 10f;
-        float minDamage = 1f;
-        float maxDamage = 10f;
+        float minSpeed = 1f, maxSpeed = 1f;
+        float minHp = 1f, maxHp = 1f;
+        float minDamage = 1f, maxDamage = 1f;
 
-        if (currentMonsterType == EMonsterType.Mon1)
+        switch (currentMonsterType)
         {
-            minSpeed = 1;
-            maxSpeed = 5;
-            minHp = 1;
-            maxHp = 10;
-            minDamage = 1;
-            maxDamage = 10;
+            case EnemyType.Enemy1:
+                minSpeed = 1; maxSpeed = 5;
+                minHp = 1; maxHp = 10;
+                minDamage = 1; maxDamage = 10;
+                break;
+            case EnemyType.Enemy2:
+                minSpeed = 0.5f; maxSpeed = 3.0f;
+                minHp = 5; maxHp = 12;
+                minDamage = 3; maxDamage = 12;
+                break;
+            case EnemyType.Enemy3:
+                minSpeed = 3.0f; maxSpeed = 7.0f;
+                minHp = 1; maxHp = 5;
+                minDamage = 1; maxDamage = 3;
+                break;
         }
-        else if (currentMonsterType == EMonsterType.Mon2)
-        {
-            minSpeed = 0.5f;
-            maxSpeed = 3.0f;
-            minHp = 5;
-            maxHp = 12;
-            minDamage = 3;
-            maxDamage = 12;
-        }
-        else if (currentMonsterType == EMonsterType.Mon3)
-        {
-            minSpeed = 3.0f;
-            maxSpeed = 7.0f;
-            minHp = 1;
-            maxHp = 5;
-            minDamage = 1;
-            maxDamage = 3;
-        }
-        monsterSpeed = Random.Range(minSpeed, maxSpeed);
-        monsterHp = Random.Range(minHp, maxHp);
-        monsterDamage = Random.Range(minDamage, maxDamage);
-        monster.speed = monsterSpeed;
-        monster.Hp = monsterHp;
-        monster.Damage = monsterDamage;
 
+        monster.monsterType = currentMonsterType;
+        monster.speed = Random.Range(minSpeed, maxSpeed);
+        monster.Hp = Random.Range(minHp, maxHp);
+        monster.maxHp = monster.Hp;
+        monster.Damage = Random.Range(minDamage, maxDamage);
     }
 
     private void OnDrawGizmosSelected()
@@ -106,3 +91,4 @@ public class AIManager : MonoBehaviour
         }
     }
 }
+

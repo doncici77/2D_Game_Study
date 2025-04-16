@@ -2,14 +2,6 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public enum EnemyType
-{
-    None,
-    Enemy,
-    Enemy2,
-    Enemy3
-}
-
 public enum StateType
 {
     Idle, PatrolWalk, PatrolRun, ChaseWalk, ChaseRun, StrongAttack, Attack
@@ -20,15 +12,15 @@ public class EnemyManager : MonoBehaviour
     private Color originalColor;
     private Renderer objectRenderer;
     public float colorChangeDuration = 0.5f;
-    public float speed = 2.0f;
-    public float Hp = 10;
-    public float maxHp = 10;
-    public float Damage = 1;
+    public float speed;
+    public float Hp;
+    public float maxHp;
+    public float Damage;
     public float maxDistance = 3.0f;
     private Vector3 startPos;
     private int direction = 1;
     public GroundType currentGroundType;
-    public EnemyType monsterType = EnemyType.None;
+    public EnemyType monsterType = EnemyType.Enemy1;
     public StateType stateType = StateType.Idle;
 
     public Transform player;
@@ -47,18 +39,16 @@ public class EnemyManager : MonoBehaviour
         objectRenderer = GetComponent<SpriteRenderer>();
         originalColor = objectRenderer.material.color;
         startPos = transform.position;
-        int randomChoice = Random.Range(0, 1);
+
         if (player == null)
-        {
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
-        }
 
         stateChangeRoutine = StartCoroutine(RandomStateChanger());
     }
 
-    private void Update()
+    void Update()
     {
-        if (monsterType == EnemyType.None || player == null) return;
+        if (player == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
@@ -72,18 +62,16 @@ public class EnemyManager : MonoBehaviour
             }
             return;
         }
+
         if (distanceToPlayer <= chaseRange)
         {
             if (stateType != StateType.ChaseWalk && stateType != StateType.ChaseRun)
             {
                 if (stateChangeRoutine != null)
-                {
                     StopCoroutine(stateChangeRoutine);
-                }
 
                 int chaseType = Random.Range(0, 2);
                 stateType = chaseType == 0 ? StateType.ChaseWalk : StateType.ChaseRun;
-                Debug.Log($"[상태 전환] 추적 상태 : {stateType}");
             }
 
             Vector3 directionToPlayer = (player.position - transform.position).normalized;
@@ -94,12 +82,9 @@ public class EnemyManager : MonoBehaviour
 
         if ((stateType == StateType.ChaseWalk || stateType == StateType.ChaseRun) && distanceToPlayer > chaseRange)
         {
-            Debug.Log("[상태 복귀] 추적 종료");
             stateType = StateType.Idle;
             if (stateChangeRoutine == null)
-            {
                 stateChangeRoutine = StartCoroutine(RandomStateChanger());
-            }
         }
 
         if (stateType == StateType.Attack) return;
@@ -113,18 +98,12 @@ public class EnemyManager : MonoBehaviour
         {
             if (stateType == StateType.PatrolWalk || stateType == StateType.PatrolRun)
             {
-                if (transform.position.y > startPos.y + maxDistance)
-                {
-                    direction = -1;
-                }
-                else if (transform.position.y < startPos.y - maxDistance)
-                {
-                    direction = 1;
-                }
+                if (transform.position.y > startPos.y + maxDistance) direction = -1;
+                else if (transform.position.y < startPos.y - maxDistance) direction = 1;
+
                 float movespeed = stateType == StateType.PatrolRun ? speed * 2 : speed;
                 transform.position += new Vector3(0, movespeed * direction * Time.deltaTime, 0);
             }
-
         }
         else
         {
@@ -149,14 +128,8 @@ public class EnemyManager : MonoBehaviour
         {
             StartCoroutine(ChangeColorTemporatily());
             collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
-            if(Hp > 1)
-            {
-                Hp -= 1;
-            }
-            else
-            {
-                Hp = 0;
-            }
+
+            Hp = Mathf.Max(0, Hp - 1);
             healthBar.UpdateHealthBar(Hp, maxHp);
         }
         else if (collision.CompareTag("Player"))
@@ -188,17 +161,14 @@ public class EnemyManager : MonoBehaviour
             yield return new WaitForSeconds(stateChanageInterval);
             int randomState = Random.Range(0, 3);
             stateType = (StateType)randomState;
-            Debug.Log($"[랜덤 상태 전환] 현재 상태 : {stateType}");
         }
     }
 
     IEnumerator AttackRoutine()
     {
         isAttacking = true;
-        Debug.Log("[공격 상태] 공격 시작");
         yield return new WaitForSeconds(1.0f);
         isAttacking = false;
-        Debug.Log("[공격 상태] 공격 종료, 상태 복귀");
         stateChangeRoutine = StartCoroutine(RandomStateChanger());
     }
 }
