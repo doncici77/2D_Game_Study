@@ -53531,6 +53531,7 @@ GameObject:
   - component: {fileID: 291058323252705211}
   - component: {fileID: 8569051614555058447}
   - component: {fileID: 8569051614555058448}
+  - component: {fileID: 8569051614555058449}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -53576,6 +53577,7 @@ MonoBehaviour:
   shakeMagnitude: 0.05
   delayTime: 0.15
   impulseSource: {fileID: 354876025}
+  dungeonGenerator: {fileID: 0}
 --- !u!1001 &2472507303508473615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54060,6 +54062,23 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &8569051614555058449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1003898368738739005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2ca511b5615424449823840d9b48b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 100
+  currentHp: 0
+  damage: 10
+  attackSpeed: 1
+  moveSpeed: 3
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

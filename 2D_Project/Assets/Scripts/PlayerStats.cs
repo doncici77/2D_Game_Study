@@ -72,7 +72,7 @@ public class PlayerStats : MonoBehaviour
         GameManager.instance.SavePlayerStats(this);
     }
 
-    public void UpgradeAttackSpeed(int amount)
+    public void UpgradeAttackSpeed(float amount)
     {
         attackSpeed += amount;
         GameManager.instance.SavePlayerStats(this);
@@ -84,7 +84,7 @@ public class PlayerStats : MonoBehaviour
         GameManager.instance.SavePlayerStats(this);
     }
 
-    public void UpgradeMoveSpeed(int amount)
+    public void UpgradeMoveSpeed(float amount)
     {
         moveSpeed += amount;
         GameManager.instance.SavePlayerStats(this);

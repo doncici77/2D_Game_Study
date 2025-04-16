@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1300566838262783158}
-  - component: {fileID: 1167574052319753171}
+  - component: {fileID: 5361601578922872853}
   m_Layer: 0
   m_Name: CinemachinePoly
   m_TagString: Untagged
@@ -32,14 +32,14 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7419667488133045893}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1167574052319753171
-BoxCollider2D:
+--- !u!60 &5361601578922872853
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802022671627468050}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -62,7 +62,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -76,8 +76,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 60, y: 40}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.19238424, y: 20.176016}
+      - {x: -29.886301, y: 20.07679}
+      - {x: -30.08434, y: -20.162899}
+      - {x: 30.187838, y: -19.74891}
+      - {x: 30.151726, y: 20.180286}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2072671997802259153
 GameObject:
   m_ObjectHideFlags: 0
