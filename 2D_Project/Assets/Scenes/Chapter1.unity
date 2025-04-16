@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f453f694addf4275988fac205bc91968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoundingShape2D: {fileID: 1251844178}
+  BoundingShape2D: {fileID: 0}
   Damping: 0.5
   SlowingDistance: 5
   OversizeWindow:
@@ -828,9 +828,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefabs:
-  - {fileID: 1361361299}
-  - {fileID: 1361361299}
-  roomCount: 5
+  - {fileID: 6244276965524714279, guid: 447e041c66b5aa54c906f907ad7ac487, type: 3}
+  - {fileID: 5535094698296245419, guid: d66a5421c5d57944287b7da2f59196d0, type: 3}
+  - {fileID: 5535094698296245419, guid: d66a5421c5d57944287b7da2f59196d0, type: 3}
+  - {fileID: 1856734966871183390, guid: ee4ee4aa0776bf8469ae756736297473, type: 3}
+  startMap: {fileID: 794493500}
+  roomCount: 3
   playerPos: {fileID: 1775894283}
   confiner: {fileID: 128805800}
   camera: {fileID: 945654480}
@@ -2826,6 +2829,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &794493500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6244276965524714279, guid: 447e041c66b5aa54c906f907ad7ac487, type: 3}
+  m_PrefabInstance: {fileID: 4488510443101506707}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &868084540
 GameObject:
   m_ObjectHideFlags: 0
@@ -4134,11 +4142,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &1251844178 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 5361601578922872853, guid: 447e041c66b5aa54c906f907ad7ac487, type: 3}
-  m_PrefabInstance: {fileID: 8224627714492005746}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1258761543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4486,11 +4489,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1361361299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6244276965524714279, guid: 447e041c66b5aa54c906f907ad7ac487, type: 3}
-  m_PrefabInstance: {fileID: 8224627714492005746}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1454485240
 GameObject:
   m_ObjectHideFlags: 0
@@ -51514,7 +51512,7 @@ Transform:
   - {fileID: 871403810}
   m_Father: {fileID: 666660504}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &8224627714492005746
+--- !u!1001 &4488510443101506707
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -51584,5 +51582,5 @@ SceneRoots:
   - {fileID: 945654485}
   - {fileID: 130409160}
   - {fileID: 128805803}
-  - {fileID: 8224627714492005746}
   - {fileID: 206288473}
+  - {fileID: 4488510443101506707}
