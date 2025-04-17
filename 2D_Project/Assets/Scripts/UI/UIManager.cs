@@ -5,14 +5,11 @@ public class UIManager : MonoBehaviour
 {
     public Text coinText;
     public Slider hpSlider;
-    public Text skill;
-    public Text weapon;
+    public GameObject dash;
+    public GameObject grappling;
+    public GameObject wShort;
+    public GameObject wLong;
     public GameObject dead;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -21,20 +18,24 @@ public class UIManager : MonoBehaviour
 
         if (PlayerStats.Instance.skillType == SkillType.Dash)
         {
-            skill.text = "스킬 : 대쉬";
+            dash.SetActive(true);
+            grappling.SetActive(false);
         }
         else if(PlayerStats.Instance.skillType == SkillType.Grappling)
         {
-            skill.text = "스킬 : 그래플링";
+            dash.SetActive(false);
+            grappling.SetActive(true);
         }
 
         if (PlayerStats.Instance.weaponType == WeaponType.Short)
         {
-            weapon.text = "무기 : 근거리";
+            wShort.SetActive(true);
+            wLong.SetActive(false);
         }
         else if (PlayerStats.Instance.weaponType == WeaponType.Long)
         {
-            weapon.text = "무기 : 원거리";
+            wShort.SetActive(false);
+            wLong.SetActive(true);
         }
     }
 
