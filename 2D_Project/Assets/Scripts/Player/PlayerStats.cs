@@ -29,6 +29,8 @@ public class PlayerStats : MonoBehaviour
     public bool isDead = false;
     public UIManager uiManager;
 
+    public int killcount = 0;
+
     private PlayerAnimation animation;
 
     private void Awake()
@@ -48,6 +50,11 @@ public class PlayerStats : MonoBehaviour
     {
         GameManager.instance.LoadPlayerStats(this);
         animation = GetComponent<PlayerAnimation>();
+    }
+
+    public void Killed()
+    {
+        killcount++;
     }
 
     public void ChangeSkill(SkillType skill)

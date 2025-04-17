@@ -136,6 +136,8 @@ public class EnemyManager : MonoBehaviour
 
             Hp = Mathf.Max(0, Hp - 1);
             healthBar.UpdateHealthBar(Hp, maxHp);
+
+            Die();
         }
         else if (collision.CompareTag("Player"))
         {
@@ -149,8 +151,20 @@ public class EnemyManager : MonoBehaviour
             Hp = Mathf.Max(0, Hp - 1);
             healthBar.UpdateHealthBar(Hp, maxHp);
 
+            Die();
+
             Debug.Log("collision : " + collision.name);
             Destroy(collision.gameObject);
+        }
+    }
+
+    void Die()
+    {
+        if (Hp <= 0)
+        {
+            PlayerStats.Instance.Killed();
+            // 죽음 애니메이션 추가
+            this.gameObject.SetActive(false);
         }
     }
 
