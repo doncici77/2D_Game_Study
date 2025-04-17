@@ -23,9 +23,10 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(InventoryItem item) //아이테무가
+    public void AddItem(InventoryItem item) //아이템 추가
     {
         inventory.Add(item);
+        InventoryUI.Instance.UpdateInventoryUI();
         SaveInventory(); //저장
     }
 

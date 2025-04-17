@@ -26,17 +26,21 @@ public class PlayerMovement : MonoBehaviour
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
 
-    [SerializeField] private TrailRenderer tr;
+    private TrailRenderer tr;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnimation = GetComponent<PlayerAnimation>();
-        tr = GetComponent<TrailRenderer>();
     }
 
     private void Update()
     {
+        if (PlayerStats.Instance.isDead)
+        {
+            return;
+        }
+
         if (isDashing)
         {
             return;
@@ -56,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        tr = GetComponent<TrailRenderer>();
+
         canDash = false;
         isDashing = true;
         gameObject.GetComponent<PlayerController>().isInvincible = true;

@@ -43,6 +43,11 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool("IsFalling", false);
     }
 
+    public void PlayDead()
+    {
+        animator.SetTrigger("Dead");
+    }
+
     public void PlaySoundWalk()
     {
         SoundManager.Instance.PlaySFX(SFXType.Walk);

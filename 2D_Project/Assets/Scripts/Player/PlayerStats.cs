@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum SkillType
 {
@@ -24,6 +26,10 @@ public class PlayerStats : MonoBehaviour
     public float moveSpeed = 3.0f;
     public SkillType skillType = SkillType.Grappling;
     public WeaponType weaponType = WeaponType.Short;
+    public bool isDead = false;
+    public UIManager uiManager;
+
+    private PlayerAnimation animation;
 
     private void Awake()
     {
@@ -41,6 +47,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         GameManager.instance.LoadPlayerStats(this);
+        animation = GetComponent<PlayerAnimation>();
     }
 
     public void ChangeSkill(SkillType skill)
@@ -59,7 +66,7 @@ public class PlayerStats : MonoBehaviour
 
         if(currentHp <= 0)
         {
-            // 죽음
+            StartCoroutine(Die());
         }
     }
 
@@ -73,9 +80,23 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void Die()
+    IEnumerator Die()
     {
-        // 예) GameOver
+        animation.PlayDead();
+        isDead = true;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+
+        yield return new WaitForSeconds(2f);
+        uiManager.Dead(true);
+
+        yield return new WaitForSeconds(1f);
+
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Collider2D>().enabled = true;
+        isDead = false;
+        uiManager.Dead(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //현재 씬 다시 불러오기
     }
 
     public int GetDamage()

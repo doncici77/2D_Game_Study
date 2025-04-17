@@ -55,6 +55,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(PlayerStats.Instance.isDead)
+        {
+            return;
+        }
+
         if (!isKnockback)
         {
             movement.HandleMovement();

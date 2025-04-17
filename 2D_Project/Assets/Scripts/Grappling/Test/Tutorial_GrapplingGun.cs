@@ -61,6 +61,11 @@ public class Tutorial_GrapplingGun : MonoBehaviour
 
     private void Update()
     {
+        if(PlayerStats.Instance.isDead)
+        {
+            return;
+        }
+
         if (PlayerStats.Instance.skillType == SkillType.Grappling)
         {
             if (Input.GetKeyDown(KeyCode.Mouse1))

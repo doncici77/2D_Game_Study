@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public Text hpText;
     public Text skill;
     public Text weapon;
+    public GameObject dead;
 
     void Start()
     {
@@ -35,5 +36,10 @@ public class UIManager : MonoBehaviour
         {
             weapon.text = "무기 : 원거리";
         }
+    }
+
+    public void Dead(bool set)
+    {
+        dead.SetActive(set);
     }
 }

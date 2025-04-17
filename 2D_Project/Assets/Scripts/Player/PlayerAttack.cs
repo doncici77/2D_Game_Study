@@ -23,6 +23,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerStats.Instance.isDead)
+        {
+            return;
+        }
+
         Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         RotateGun(mousePos);
     }

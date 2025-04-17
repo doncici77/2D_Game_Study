@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ParticleManager : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class ParticleManager : MonoBehaviour
             {
                 GameObject obj = Instantiate(particlePrefabDic[type]);
                 obj.SetActive(false);
+                DontDestroyOnLoad(obj); // 추가
                 pool.Enqueue(obj);
             }
             particlePools.Add(type, pool);
@@ -43,12 +45,15 @@ public class ParticleManager : MonoBehaviour
 
     public void ParticlePlay(ParticleType type, Vector3 position, Vector3 scale)
     {
-        if (particlePools.ContainsKey(type))
+        Debug.Log("파티클 1");
+        if (particlePools.ContainsKey(type) && particlePools[type].Count > 0)
         {
+            Debug.Log("파티클 2");
             GameObject particleObj = particlePools[type].Dequeue();
 
             if (particleObj != null)
             {
+                Debug.Log("파티클 3");
                 particleObj.transform.position = position;
                 particleObj.transform.localScale = scale;
                 particleObj.SetActive(true);
@@ -56,6 +61,7 @@ public class ParticleManager : MonoBehaviour
                 Animator animator = particleObj.GetComponent<Animator>();
                 if (animator != null)
                 {
+                    Debug.Log("파티클 4");
                     animator.Play(0);
                     StartCoroutine(AnimationEndCoroutine(type, particleObj, animator));
                 }
@@ -65,12 +71,15 @@ public class ParticleManager : MonoBehaviour
 
     public void ParticlePlay(ParticleType type, Vector3 position, Vector3 scale, Vector3 rotate)
     {
-        if (particlePools.ContainsKey(type))
+        Debug.Log("파티클 1");
+        if (particlePools.ContainsKey(type) && particlePools[type].Count > 0)
         {
+            Debug.Log("파티클 2");
             GameObject particleObj = particlePools[type].Dequeue();
 
             if (particleObj != null)
             {
+                Debug.Log("파티클 3");
                 particleObj.transform.position = position;
                 particleObj.transform.eulerAngles = rotate;
                 particleObj.transform.localScale = scale;
@@ -79,6 +88,7 @@ public class ParticleManager : MonoBehaviour
                 Animator animator = particleObj.GetComponent<Animator>();
                 if (animator != null)
                 {
+                    Debug.Log("파티클 4");
                     animator.Play(0);
                     StartCoroutine(AnimationEndCoroutine(type, particleObj, animator));
                 }
