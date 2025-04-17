@@ -13,6 +13,7 @@ TagManager:
   - Portal
   - LeftPortal
   - RightPortal
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -139,6 +139,17 @@ public class EnemyManager : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage();
         }
+        
+        if(collision.CompareTag("Bullet"))
+        {
+            StartCoroutine(ChangeColorTemporatily());
+
+            Hp = Mathf.Max(0, Hp - 1);
+            healthBar.UpdateHealthBar(Hp, maxHp);
+
+            Debug.Log("collision : " + collision.name);
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)

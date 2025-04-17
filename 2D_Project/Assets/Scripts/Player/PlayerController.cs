@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(PlayerStats.Instance.isDead)
+        if (PlayerStats.Instance.isDead)
         {
             return;
         }
@@ -65,12 +65,9 @@ public class PlayerController : MonoBehaviour
             movement.HandleMovement();
         }
 
-        if (PlayerStats.Instance.weaponType == WeaponType.Short)
-        {
-            attack.PerformAttack();
-        }
+        attack.PerformAttack();
 
-        if(Input.GetKeyDown(KeyCode.W) && canGoingNextScene)
+        if (Input.GetKeyDown(KeyCode.W) && canGoingNextScene)
         {
             SceneController.Instance.StartSeneTransition(nextSceneName);
         }
@@ -87,9 +84,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if(PlayerStats.Instance.skillType == SkillType.Grappling)
+            if (PlayerStats.Instance.skillType == SkillType.Grappling)
             {
                 PlayerStats.Instance.ChangeSkill(SkillType.Dash);
             }
@@ -99,11 +96,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             PlayerStats.Instance.ChangeWeapon(WeaponType.Long);
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             PlayerStats.Instance.ChangeWeapon(WeaponType.Short);
         }
@@ -137,13 +134,13 @@ public class PlayerController : MonoBehaviour
             transform.position = startPlayerPos;
         }
 
-        if(collision.CompareTag("Portal"))
+        if (collision.CompareTag("Portal"))
         {
             nextSceneName = collision.gameObject.name;
             canGoingNextScene = true;
         }
 
-        if(collision.CompareTag("LeftPortal"))
+        if (collision.CompareTag("LeftPortal"))
         {
             dungeonGenerator.GenerateDungeon(PortalDir.left);
         }
