@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = new Vector3(isRight ? 6 : -6, transform.localScale.y, transform.localScale.z);
         mouseDirection = (point - transform.position).normalized;
 
-        if (Input.GetKeyDown(KeyCode.F) && canDash && !isGrapple)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canDash && PlayerStats.Instance.skillType == SkillType.Dash)
         {
             StartCoroutine(Dash());
         }

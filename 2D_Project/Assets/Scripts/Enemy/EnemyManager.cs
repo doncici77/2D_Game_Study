@@ -48,48 +48,51 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return;
-
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= attackRange && !isAttacking)
+        if (monsterType != EnemyType.None)
         {
-            if (stateType != StateType.Attack)
-            {
-                StopAllCoroutines();
-                stateType = StateType.StrongAttack;
-                StartCoroutine(AttackRoutine());
-            }
-            return;
-        }
+            if (player == null) return;
 
-        if (distanceToPlayer <= chaseRange)
-        {
-            if (stateType != StateType.ChaseWalk && stateType != StateType.ChaseRun)
-            {
-                if (stateChangeRoutine != null)
-                    StopCoroutine(stateChangeRoutine);
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-                int chaseType = Random.Range(0, 2);
-                stateType = chaseType == 0 ? StateType.ChaseWalk : StateType.ChaseRun;
+            if (distanceToPlayer <= attackRange && !isAttacking)
+            {
+                if (stateType != StateType.Attack)
+                {
+                    StopAllCoroutines();
+                    stateType = StateType.StrongAttack;
+                    StartCoroutine(AttackRoutine());
+                }
+                return;
             }
 
-            Vector3 directionToPlayer = (player.position - transform.position).normalized;
-            float chaseSpeed = stateType == StateType.ChaseRun ? speed * 2 : speed;
-            transform.position += directionToPlayer * chaseSpeed * Time.deltaTime;
-            return;
+            if (distanceToPlayer <= chaseRange)
+            {
+                if (stateType != StateType.ChaseWalk && stateType != StateType.ChaseRun)
+                {
+                    if (stateChangeRoutine != null)
+                        StopCoroutine(stateChangeRoutine);
+
+                    int chaseType = Random.Range(0, 2);
+                    stateType = chaseType == 0 ? StateType.ChaseWalk : StateType.ChaseRun;
+                }
+
+                Vector3 directionToPlayer = (player.position - transform.position).normalized;
+                float chaseSpeed = stateType == StateType.ChaseRun ? speed * 2 : speed;
+                transform.position += directionToPlayer * chaseSpeed * Time.deltaTime;
+                return;
+            }
+
+            if ((stateType == StateType.ChaseWalk || stateType == StateType.ChaseRun) && distanceToPlayer > chaseRange)
+            {
+                stateType = StateType.Idle;
+                if (stateChangeRoutine == null)
+                    stateChangeRoutine = StartCoroutine(RandomStateChanger());
+            }
+
+            if (stateType == StateType.Attack) return;
+
+            PartrolMovement();
         }
-
-        if ((stateType == StateType.ChaseWalk || stateType == StateType.ChaseRun) && distanceToPlayer > chaseRange)
-        {
-            stateType = StateType.Idle;
-            if (stateChangeRoutine == null)
-                stateChangeRoutine = StartCoroutine(RandomStateChanger());
-        }
-
-        if (stateType == StateType.Attack) return;
-
-        PartrolMovement();
     }
 
     private void PartrolMovement()

@@ -60,7 +60,10 @@ public class PlayerController : MonoBehaviour
             movement.HandleMovement();
         }
 
-        attack.PerformAttack();
+        if (PlayerStats.Instance.weaponType == WeaponType.Short)
+        {
+            attack.PerformAttack();
+        }
 
         if(Input.GetKeyDown(KeyCode.W) && canGoingNextScene)
         {
@@ -77,6 +80,27 @@ public class PlayerController : MonoBehaviour
             {
                 Pause();
             }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            if(PlayerStats.Instance.skillType == SkillType.Grappling)
+            {
+                PlayerStats.Instance.ChangeSkill(SkillType.Dash);
+            }
+            else if (PlayerStats.Instance.skillType == SkillType.Dash)
+            {
+                PlayerStats.Instance.ChangeSkill(SkillType.Grappling);
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PlayerStats.Instance.ChangeWeapon(WeaponType.Long);
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            PlayerStats.Instance.ChangeWeapon(WeaponType.Short);
         }
     }
 

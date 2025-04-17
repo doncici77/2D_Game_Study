@@ -61,64 +61,66 @@ public class Tutorial_GrapplingGun : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (PlayerStats.Instance.skillType == SkillType.Grappling)
         {
-            SetGrapplePoint();
-        }
-        else if (Input.GetKey(KeyCode.Mouse1))
-        {
-            if (grappleRope.enabled)
+            if (Input.GetKeyDown(KeyCode.Mouse1))
             {
-                RotateGun(grapplePoint, false);
-
-                // E 키: 오른쪽 방향으로 힘
-                if (Input.GetKeyDown(KeyCode.E) && canImpulse)
+                SetGrapplePoint();
+            }
+            else if (Input.GetKey(KeyCode.Mouse1))
+            {
+                if (grappleRope.enabled)
                 {
-                    m_rigidbody.AddForce(Vector2.right * impulseForce, ForceMode2D.Impulse);
-                    canImpulse = false;
+                    RotateGun(grapplePoint, false);
+
+                    // E 키: 오른쪽 방향으로 힘
+                    if (Input.GetKeyDown(KeyCode.E) && canImpulse)
+                    {
+                        m_rigidbody.AddForce(Vector2.right * impulseForce, ForceMode2D.Impulse);
+                        canImpulse = false;
+                    }
+
+                    // Q 키: 왼쪽 방향으로 힘
+                    if (Input.GetKeyDown(KeyCode.Q) && canImpulse)
+                    {
+                        m_rigidbody.AddForce(Vector2.left * impulseForce, ForceMode2D.Impulse);
+                        canImpulse = false;
+                    }
+                }
+                else
+                {
+                    Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
+                    RotateGun(mousePos, true);
                 }
 
-                // Q 키: 왼쪽 방향으로 힘
-                if (Input.GetKeyDown(KeyCode.Q) && canImpulse)
+                if (launchToPoint && grappleRope.isGrappling)
                 {
-                    m_rigidbody.AddForce(Vector2.left * impulseForce, ForceMode2D.Impulse);
-                    canImpulse = false;
+                    if (launchType == LaunchType.Transform_Launch)
+                    {
+                        Vector2 firePointDistnace = firePoint.position - gunHolder.localPosition;
+                        Vector2 targetPos = grapplePoint - firePointDistnace;
+                        gunHolder.position = Vector2.Lerp(gunHolder.position, targetPos, Time.deltaTime * launchSpeed);
+                    }
                 }
+            }
+            else if (Input.GetKeyUp(KeyCode.Mouse1))
+            {
+                grappleRope.enabled = false;
+                m_springJoint2D.enabled = false;
+
+                if (launchType == LaunchType.Transform_Launch)
+                {
+                    m_rigidbody.gravityScale = 1;
+                }
+
+                canImpulse = true;
             }
             else
             {
                 Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
                 RotateGun(mousePos, true);
             }
-
-            if (launchToPoint && grappleRope.isGrappling)
-            {
-                if (launchType == LaunchType.Transform_Launch)
-                {
-                    Vector2 firePointDistnace = firePoint.position - gunHolder.localPosition;
-                    Vector2 targetPos = grapplePoint - firePointDistnace;
-                    gunHolder.position = Vector2.Lerp(gunHolder.position, targetPos, Time.deltaTime * launchSpeed);
-                }
-            }
         }
-        else if (Input.GetKeyUp(KeyCode.Mouse1))
-        {
-            grappleRope.enabled = false;
-            m_springJoint2D.enabled = false;
-
-            if (launchType == LaunchType.Transform_Launch)
-            {
-                m_rigidbody.gravityScale = 1;
-            }
-
-            canImpulse = true;
-        }
-        else
-        {
-            Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-            RotateGun(mousePos, true);
-        }
-
     }
 
     void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)

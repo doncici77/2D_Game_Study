@@ -43,6 +43,16 @@ public class PlayerStats : MonoBehaviour
         GameManager.instance.LoadPlayerStats(this);
     }
 
+    public void ChangeSkill(SkillType skill)
+    {
+        skillType = skill;
+    }
+
+    public void ChangeWeapon(WeaponType weapon)
+    {
+        weaponType = weapon;
+    }
+
     public void TakeDamage(int amount)
     {
         currentHp -= amount;
