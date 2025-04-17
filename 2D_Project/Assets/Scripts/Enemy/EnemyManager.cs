@@ -41,7 +41,9 @@ public class EnemyManager : MonoBehaviour
         startPos = transform.position;
 
         if (player == null)
+        {
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        }
 
         stateChangeRoutine = StartCoroutine(RandomStateChanger());
     }

@@ -15,7 +15,6 @@ public class AIManager : MonoBehaviour
     public float spawnRangeY = 5.0f;
     public int enemyCount = 5;
     public Transform[] spawnPoints;
-    public EnemyType currentMonsterType = EnemyType.Enemy1;
 
     void Start()
     {
@@ -51,7 +50,7 @@ public class AIManager : MonoBehaviour
         float minHp = 1f, maxHp = 1f;
         float minDamage = 1f, maxDamage = 1f;
 
-        switch (currentMonsterType)
+        switch (monster.monsterType)
         {
             case EnemyType.Enemy1:
                 minSpeed = 1; maxSpeed = 5;
@@ -70,25 +69,10 @@ public class AIManager : MonoBehaviour
                 break;
         }
 
-        monster.monsterType = currentMonsterType;
         monster.speed = Random.Range(minSpeed, maxSpeed);
         monster.Hp = Random.Range(minHp, maxHp);
         monster.maxHp = monster.Hp;
         monster.Damage = Random.Range(minDamage, maxDamage);
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(Vector2.zero, new Vector2(spawnRangeX * 2, spawnRangeY * 2));
-        Gizmos.color = Color.blue;
-        if (spawnPoints.Length > 0)
-        {
-            foreach (Transform spawnPoint in spawnPoints)
-            {
-                Gizmos.DrawWireSphere(spawnPoint.position, 0.5f);
-            }
-        }
     }
 }
 

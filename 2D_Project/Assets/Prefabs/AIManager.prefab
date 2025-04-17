@@ -47,7 +47,6 @@ MonoBehaviour:
   monsterPrefab: {fileID: 5866512551813542506, guid: e2cb42d495040ba43a1e0add6cbeadbc, type: 3}
   spawnRangeX: 10
   spawnRangeY: 5
-  enemyCount: 5
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  enemyCount: 0
+  spawnPoints: []
+  currentMonsterType: 1

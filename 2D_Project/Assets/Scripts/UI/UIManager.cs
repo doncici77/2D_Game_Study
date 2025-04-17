@@ -13,7 +13,10 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        coinText.text = "코인 : " + GameManager.instance.coinCount;
+        if (GameManager.instance != null)
+        {
+            coinText.text = "코인 : " + GameManager.instance.coinCount;
+        }
         hpSlider.value = (float)PlayerStats.Instance.currentHp / (float)PlayerStats.Instance.maxHp;
 
         if (PlayerStats.Instance.skillType == SkillType.Dash)

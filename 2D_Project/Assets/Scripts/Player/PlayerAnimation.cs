@@ -68,7 +68,7 @@ public class PlayerAnimation : MonoBehaviour
         }
         else
         {
-            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerAttack, attackPos.position, new Vector3(5, 5, 5), attackPivot.eulerAngles);
+            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerAttack, attackPos.position, new Vector3(5, 5, 5), attackPivot.eulerAngles);    
         }
     }
 
