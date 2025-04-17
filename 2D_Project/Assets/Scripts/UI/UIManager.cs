@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Text coinText;
-    public Text hpText;
+    public Slider hpSlider;
     public Text skill;
     public Text weapon;
     public GameObject dead;
@@ -17,9 +17,9 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         coinText.text = "코인 : " + GameManager.instance.coinCount;
-        hpText.text = "체력 : " + PlayerStats.Instance.currentHp;
+        hpSlider.value = (float)PlayerStats.Instance.currentHp / (float)PlayerStats.Instance.maxHp;
 
-        if(PlayerStats.Instance.skillType == SkillType.Dash)
+        if (PlayerStats.Instance.skillType == SkillType.Dash)
         {
             skill.text = "스킬 : 대쉬";
         }
