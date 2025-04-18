@@ -66,6 +66,7 @@ public class PlayerAttack : MonoBehaviour
             bullet = BulletPool.Instance.Get("Bullet");
             bullet.transform.position = attackPos.position;
             bullet.gameObject.GetComponent<Bullet>().SetBullet(hit.point);
+            SoundManager.Instance.PlaySFX(SFXType.PlayerBullet);
         }
     }
 

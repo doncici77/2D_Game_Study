@@ -76,6 +76,7 @@ public class Tutorial_GrapplingRope : MonoBehaviour
             {
                 grapplingGun.Grapple();
                 isGrappling = true;
+                SoundManager.Instance.PlaySFX(SFXType.Rope);
             }
             if (waveSize > 0)
             {

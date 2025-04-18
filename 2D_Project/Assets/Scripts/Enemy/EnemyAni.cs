@@ -17,5 +17,6 @@ public class EnemyAni : MonoBehaviour
     public void Dead()
     {
         animator.SetTrigger("Dead");
+        SoundManager.Instance.PlaySFX(SFXType.EnemyDead);
     }
 }

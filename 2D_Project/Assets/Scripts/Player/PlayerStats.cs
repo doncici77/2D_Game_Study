@@ -95,6 +95,7 @@ public class PlayerStats : MonoBehaviour
         isDead = true;
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        SoundManager.Instance.PlaySFX(SFXType.PlayerDead);
 
         yield return new WaitForSeconds(2f);
         uiManager.Dead(true);

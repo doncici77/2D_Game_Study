@@ -68,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.linearVelocity = new Vector2(mouseDirection.x * dashingPower, mouseDirection.y * dashingPower);
+        SoundManager.Instance.PlaySFX(SFXType.Dash);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;

@@ -199,5 +199,11 @@ public enum SFXType
     Walk,
     Land,
     ItemGet,
-    Hit
+    Hit,
+    Grappling,
+    PlayerBullet,
+    EnemyDead,
+    PlayerDead,
+    Dash,
+    Rope
 }
