@@ -535,7 +535,7 @@ MonoBehaviour:
   launchType: 1
   launchSpeed: 3
   autoConfigureDistance: 0
-  targetDistance: 3
+  targetDistance: 5
   targetFrequncy: 1
   grapplePoint: {x: 0, y: 0}
   grappleDistanceVector: {x: 0, y: 0}

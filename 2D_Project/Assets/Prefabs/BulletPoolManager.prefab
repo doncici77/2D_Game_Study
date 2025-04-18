@@ -44,5 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b4df758f1f50e14e9138a00c7ef5b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3798314338910161509, guid: ae94a5858c711774e82ec5f00977b6a3, type: 3}
-  initialSize: 30
+  itemsToPool:
+  - key: Bullet
+    prefab: {fileID: 3798314338910161509, guid: ae94a5858c711774e82ec5f00977b6a3, type: 3}
+    initialSize: 30
+  - key: EnemyBullet
+    prefab: {fileID: 3187981227792752039, guid: 4f10d9b7db6cc6047b1b37a4812d0c99, type: 3}
+    initialSize: 30

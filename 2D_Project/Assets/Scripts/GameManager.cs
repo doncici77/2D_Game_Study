@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    private void LoadCoin()
+    public void LoadCoin()
     {
         coinCount = PlayerPrefs.GetInt(COIN_KEY, 0);
     }

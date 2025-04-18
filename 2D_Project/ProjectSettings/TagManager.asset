@@ -14,6 +14,7 @@ TagManager:
   - LeftPortal
   - RightPortal
   - Bullet
+  - LongEnemy
   layers:
   - Default
   - TransparentFX

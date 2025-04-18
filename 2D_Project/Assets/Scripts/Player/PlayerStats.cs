@@ -48,6 +48,8 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("DataLoad");
+        GameManager.instance.LoadCoin();
         GameManager.instance.LoadPlayerStats(this);
         animation = GetComponent<PlayerAnimation>();
     }

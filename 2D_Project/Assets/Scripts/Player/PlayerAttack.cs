@@ -63,7 +63,7 @@ public class PlayerAttack : MonoBehaviour
         Debug.Log("hit : " + hit.transform.gameObject.layer);
         if (hit.transform.gameObject.layer == 3)
         {
-            bullet = BulletPool.instance.Get();
+            bullet = BulletPool.Instance.Get("Bullet");
             bullet.transform.position = attackPos.position;
             bullet.gameObject.GetComponent<Bullet>().SetBullet(hit.point);
         }

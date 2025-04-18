@@ -4,56 +4,84 @@ using UnityEngine.Pool;
 
 public class BulletPool : MonoBehaviour
 {
+    public static BulletPool Instance;
 
-    public static BulletPool instance;
+    [System.Serializable]
+    public class PoolItem
+    {
+        public string key; // 예: "Bullet", "Missile"
+        public GameObject prefab;
+        public int initialSize = 10;
+    }
 
-    public GameObject prefab;
-    public int initialSize = 30;
+    public List<PoolItem> itemsToPool;
 
-    private Queue<GameObject> pool = new Queue<GameObject>();
-
-    public IObjectPool<GameObject> Pool { get; private set; }
+    private Dictionary<string, Queue<GameObject>> poolDict = new Dictionary<string, Queue<GameObject>>();
 
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
         else
         {
             Destroy(this.gameObject);
         }
 
-
-        for (int i = 0; i < initialSize; i++)
+        // 각 풀 초기화
+        foreach (var item in itemsToPool)
         {
-            GameObject obj = Instantiate(prefab);
-            obj.gameObject.SetActive(false);
-            pool.Enqueue(obj);
+            Queue<GameObject> newQueue = new Queue<GameObject>();
+
+            for (int i = 0; i < item.initialSize; i++)
+            {
+                GameObject obj = Instantiate(item.prefab);
+                obj.SetActive(false);
+                newQueue.Enqueue(obj);
+            }
+
+            poolDict.Add(item.key, newQueue);
         }
     }
 
-    public GameObject Get()
+    public GameObject Get(string key)
     {
-        GameObject obj;
-
-        if (pool.Count > 0)
+        if (!poolDict.ContainsKey(key))
         {
-            obj = pool.Dequeue();
+            Debug.LogWarning($"풀에 {key}가 없습니다.");
+            return null;
+        }
+
+        Queue<GameObject> queue = poolDict[key];
+
+        GameObject obj;
+        if (queue.Count > 0)
+        {
+            obj = queue.Dequeue();
         }
         else
         {
-            obj = Instantiate(prefab);
+            // 추가 인스턴스 생성
+            var item = itemsToPool.Find(x => x.key == key);
+            obj = Instantiate(item.prefab);
         }
 
-        obj.gameObject.SetActive(true);
+        obj.SetActive(true);
         return obj;
     }
 
-    public void ReturnToPool(GameObject obj)
+    public void ReturnToPool(string key, GameObject obj)
     {
-        obj.gameObject.SetActive(false);
-        pool.Enqueue(obj);
+        obj.SetActive(false);
+
+        if (poolDict.ContainsKey(key))
+        {
+            poolDict[key].Enqueue(obj);
+        }
+        else
+        {
+            Destroy(obj); // 등록되지 않은 풀이면 파괴
+        }
     }
 }

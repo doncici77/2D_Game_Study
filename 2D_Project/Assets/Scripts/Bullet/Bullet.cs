@@ -23,13 +23,18 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.layer == 3)
         {
-            BulletPool.instance.ReturnToPool(this.gameObject);
+            BulletPool.Instance.ReturnToPool("Bullet",this.gameObject);
         }
 
         if(collision.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyManager>().TakeDamage(1);
-            BulletPool.instance.ReturnToPool(this.gameObject);
+            BulletPool.Instance.ReturnToPool("Bullet", this.gameObject);
+        }
+        else if(collision.CompareTag("LongEnemy"))
+        {
+            collision.gameObject.GetComponent<LongEnemy>().TakeDamage(1);
+            BulletPool.Instance.ReturnToPool("Bullet", this.gameObject);
         }
     }
 }

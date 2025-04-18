@@ -18,7 +18,7 @@ public class EnemyManager : MonoBehaviour
     public float Damage;
     public EnemyType monsterType = EnemyType.Enemy1;
 
-    [Header("행동 상태 관련")]
+    [Header("행동 상태 관련")] 
     public StateType stateType = StateType.Idle;
     private bool isGrounded = false;
     public Transform groundCheck;
