@@ -99674,6 +99674,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player0
       objectReference: {fileID: 0}
+    - target: {fileID: 2504850728752853639, guid: 797e31bef6a0a14449b4068d7f11f32d, type: 3}
+      propertyPath: dashingPower
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3404602652116827217, guid: 797e31bef6a0a14449b4068d7f11f32d, type: 3}
       propertyPath: m_camera
       value: 
