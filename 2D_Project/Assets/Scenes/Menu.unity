@@ -326,8 +326,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 594, y: -109}
-  m_SizeDelta: {x: 517.67, y: 255.49}
+  m_AnchoredPosition: {x: -388.99988, y: -399.99997}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &639840569
 MonoBehaviour:
@@ -405,7 +405,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4729931095704493027, guid: b3ab92d517dab4947920d270f3c12a8e, type: 3}
+  m_Sprite: {fileID: 1215165303490473964, guid: b3ab92d517dab4947920d270f3c12a8e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -917,8 +917,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -500, y: -54.41}
-  m_SizeDelta: {x: 424.65, y: 200.67}
+  m_AnchoredPosition: {x: -389, y: 0}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666619614
 MonoBehaviour:
@@ -1084,7 +1084,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC81C\uBAA9 \uBB34\uC5C7\uC73C\uB85C \uD558\uC9C0..."
+  m_Text: "\uB358\uC804\uC5D0\uC11C \uB85C\uD504\uC3D8\uB294 \uB0A8\uC790"
 --- !u!222 &1685507431
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1208,8 +1208,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12, y: -346}
-  m_SizeDelta: {x: 313.82, y: 314.33}
+  m_AnchoredPosition: {x: -389, y: -200}
+  m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1811646446
 MonoBehaviour:
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3996735682004513073, guid: b3ab92d517dab4947920d270f3c12a8e, type: 3}
+  m_Sprite: {fileID: 1215165303490473964, guid: b3ab92d517dab4947920d270f3c12a8e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
