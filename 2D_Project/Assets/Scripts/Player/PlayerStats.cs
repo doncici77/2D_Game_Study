@@ -92,7 +92,7 @@ public class PlayerStats : MonoBehaviour
         animation.PlayDead();
         isDead = true;
         GetComponent<Collider2D>().enabled = false;
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
 
         yield return new WaitForSeconds(2f);
         uiManager.Dead(true);

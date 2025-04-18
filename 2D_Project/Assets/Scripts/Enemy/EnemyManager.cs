@@ -1,6 +1,7 @@
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 
 // 몬스터 상태 Enum 정의
 public enum StateType
@@ -10,45 +11,46 @@ public enum StateType
 
 public class EnemyManager : MonoBehaviour
 {
-    // ----- 몬스터 속성 -----
+    [Header("몬스터 속성")]
     public float speed;
     public float Hp;
     public float maxHp;
     public float Damage;
     public EnemyType monsterType = EnemyType.Enemy1;
 
-    // ----- 행동 상태 관련 -----
+    [Header("행동 상태 관련")]
     public StateType stateType = StateType.Idle;
     private bool isGrounded = false;
     public Transform groundCheck;
     private Rigidbody2D rigidbody;
-    private EnemyAni ani;
     public Transform wallCheckRight;
     public Transform wallCheckLeft;
     private bool isWall = false;
+    private bool isDead = false;
 
-    // ----- 추적 및 공격 관련 -----
+    [Header("추적 및 공격 관련")]
     public Transform player;
     public float chaseRange = 5.0f;
     public float attackRange = 1.5f;
     public bool isAttacking = false;
+    public Collider2D attackLeft;
+    public Collider2D attackRight;
 
-    // ----- 색상 피드백 -----
+    [Header("색상 피드백")]
     private Color originalColor;
     private Renderer objectRenderer;
     public float colorChangeDuration = 0.5f;
 
-    // ----- 순찰 관련 -----
+    [Header("순찰 관련")]
     private Vector3 startPos;
     private int direction = 1;
     public float maxDistance = 3.0f;
 
-    // ----- 체력바 -----
+    [Header("체력바")]
     private HealthBar healthBar;
 
     void Start()
     {
-        ani = GetComponent<EnemyAni>();
         rigidbody = GetComponent<Rigidbody2D>();
         healthBar = GetComponentInChildren<HealthBar>();
         objectRenderer = GetComponent<SpriteRenderer>();
@@ -63,31 +65,24 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        // ----- 바닥 체크 -----
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, LayerMask.GetMask("Ground"));
-
-        rigidbody.constraints = isGrounded
-            ? RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation
-            : RigidbodyConstraints2D.FreezeRotation;
-
-        // ----- 벽 체크 및 방향 전환 (순찰용) -----
-        Transform wallCheck = direction == 1 ? wallCheckRight : wallCheckLeft;
-        isWall = Physics2D.OverlapCircle(wallCheck.position, 0.1f, LayerMask.GetMask("Ground"));
-        if (isWall)
+        if (isDead)
         {
-            direction *= -1;
-            GetComponent<SpriteRenderer>().flipX = direction == -1;
+            return;
         }
 
-        // ----- 플레이어 없는 경우 행동 중지 -----
-        if (monsterType == EnemyType.None || player == null) return;
+        GroundCheck();
+
+        WallCheck();
+
+        if (monsterType == EnemyType.None || player == null)
+        {
+            return;
+        }
 
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-
-        // ----- 공격 -----
+        
         if (distanceToPlayer <= attackRange && !isAttacking)
         {
-            StopAllCoroutines();
             StartCoroutine(AttackRoutine());
             return;
         }
@@ -96,26 +91,70 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        // ----- 추적 -----
         if (distanceToPlayer <= chaseRange)
         {
-            direction = transform.position.x > player.position.x ? -1 : 1;
-            GetComponent<SpriteRenderer>().flipX = direction == -1;
-
-            // 추적 중 벽 감지 시 이동 중지
-            bool chaseWallCheck = Physics2D.OverlapCircle(
-                direction == 1 ? wallCheckRight.position : wallCheckLeft.position,
-                0.1f, LayerMask.GetMask("Ground"));
-
-            if (!chaseWallCheck)
+            if (transform.position.x > player.position.x)
             {
-                transform.position += new Vector3(speed * direction * Time.deltaTime, 0, 0);
+                direction = -1;
+                GetComponent<SpriteRenderer>().flipX = true;
             }
+            else if (transform.position.x < player.position.x)
+            {
+                direction = 1;
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
+
+            transform.position += new Vector3(speed * direction * Time.deltaTime, 0, 0);
             return;
         }
 
-        // ----- 순찰 -----
         PatrolMovement();
+    }
+
+    void GroundCheck()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, LayerMask.GetMask("Ground"));
+
+        if (isGrounded)
+        {
+            rigidbody.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        }
+        else
+        {
+            rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+
+    void WallCheck()
+    {
+        if (direction == 1)
+        {
+            isWall = Physics2D.OverlapCircle(wallCheckRight.position, 0.1f, LayerMask.GetMask("Ground"));
+
+            if (isWall)
+            {
+                direction = -1;
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
+            else
+            {
+                isWall = false;
+            }
+        }
+        else if (direction == -1)
+        {
+            isWall = Physics2D.OverlapCircle(wallCheckLeft.position, 0.1f, LayerMask.GetMask("Ground"));
+
+            if (isWall)
+            {
+                direction = 1;
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
+            else
+            {
+                isWall = false;
+            }
+        }
     }
 
     // ----- 순찰 이동 처리 -----
@@ -146,7 +185,7 @@ public class EnemyManager : MonoBehaviour
             collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
         }
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && isAttacking)
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage();
         }
@@ -154,7 +193,7 @@ public class EnemyManager : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && isAttacking)
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage();
         }
@@ -166,15 +205,22 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine(ChangeColorTemporarily());
         Hp = Mathf.Max(0, Hp - amount);
         healthBar.UpdateHealthBar(Hp, maxHp);
-        Die();
+        StartCoroutine(Die());
     }
 
     // ----- 사망 처리 -----
-    void Die()
+    IEnumerator Die()
     {
         if (Hp <= 0)
         {
             PlayerStats.Instance.Killed();
+            GetComponent<Collider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            GetComponent<EnemyAni>().Dead();
+            isDead = true;
+
+            yield return new WaitForSeconds(1.5f);
+
             gameObject.SetActive(false);
         }
     }
@@ -188,11 +234,29 @@ public class EnemyManager : MonoBehaviour
         objectRenderer.material.color = originalColor;
     }
 
+    public void AttackCollision()
+    {
+        if (direction == 1)
+        {
+            attackRight.enabled = true;
+        }
+        else
+        {
+            attackLeft.enabled = true;
+        }
+    }
+
+    public void EndAttackCollision()
+    {
+        attackRight.enabled = false;
+        attackLeft.enabled = false;
+    }
+
     // ----- 공격 루틴 -----
     IEnumerator AttackRoutine()
     {
         isAttacking = true;
-        ani.Attack();
+        GetComponent<EnemyAni>().Attack();
         yield return new WaitForSeconds(1.0f);
         isAttacking = false;
     }
