@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         gameObject.GetComponent<PlayerController>().isInvincible = true;
         float originalGravity = rb.gravityScale;
         rb.gravityScale = 0f;
-        rb.linearVelocity = new Vector2(mouseDirection.x * dashingPower, 0f);
+        rb.linearVelocity = new Vector2(mouseDirection.x * dashingPower, mouseDirection.y * dashingPower);
         tr.emitting = true;
         yield return new WaitForSeconds(dashingTime);
         tr.emitting = false;

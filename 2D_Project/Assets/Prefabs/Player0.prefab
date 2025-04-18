@@ -167,7 +167,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a727bdb7177613244a514883daf761f8, type: 2}
+  - {fileID: 2100000, guid: 81b12124efcb20e409c888aeef6dc127, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1070,7 +1070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 50
-  currentHp: 0
+  currentHp: 100
   damage: 10
   attackSpeed: 1
   moveSpeed: 3
@@ -1078,3 +1078,4 @@ MonoBehaviour:
   weaponType: 0
   isDead: 0
   uiManager: {fileID: 0}
+  killcount: 0
