@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 
     private const string COIN_KEY = "CoinCount";
     private const string DAMAGE_KEY = "PlayerDamage";
-    private const string ATTACK_SPEED_KEY = "PlayerAttackSpeed";
     private const string MOVE_SPEED_KEY = "PlayerMoveSpeed";
     private const string HP_KEY = "PlayerHp";
 
@@ -66,7 +65,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(DAMAGE_KEY, stats.damage);
         PlayerPrefs.SetFloat(MOVE_SPEED_KEY, stats.moveSpeed);
-        PlayerPrefs.SetFloat(ATTACK_SPEED_KEY, stats.attackSpeed);
         PlayerPrefs.SetInt(HP_KEY, stats.maxHp);
     }
 
@@ -79,10 +77,6 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey(MOVE_SPEED_KEY))
         {
             stats.moveSpeed = PlayerPrefs.GetFloat(MOVE_SPEED_KEY);
-        }
-        if (PlayerPrefs.HasKey(ATTACK_SPEED_KEY))
-        {
-            stats.attackSpeed = PlayerPrefs.GetFloat(ATTACK_SPEED_KEY);
         }
         if (PlayerPrefs.HasKey(HP_KEY))
         {

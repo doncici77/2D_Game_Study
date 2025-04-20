@@ -6,6 +6,7 @@ public class ChapterUI : MonoBehaviour
 {
     public Text mapNumText;
     public Text monsterCoundText;
+    public Text mapCountText;
     public DungeonGenerator dungeonGenerator;
     private int currentRoomNum;
     private int monMax;
@@ -20,8 +21,9 @@ public class ChapterUI : MonoBehaviour
     private void Update()
     {
         mapNumText.text = " 맵 넘버 : " + dungeonGenerator.roomNumber;
+        mapCountText.text = "남은 맵 개수 : " + (dungeonGenerator.roomCount + 1);
 
-        if(currentRoomNum != dungeonGenerator.roomNumber)
+        if (currentRoomNum != dungeonGenerator.roomNumber)
         {
             currentRoomNum = dungeonGenerator.roomNumber;
             currentRoom = dungeonGenerator.GetRoomData(currentRoomNum);
@@ -31,7 +33,7 @@ public class ChapterUI : MonoBehaviour
         else if(currentRoomNum != 50)
         {
             (monCurrent, monMax) = currentRoom.GetComponent<Map>().GetMonCountData();
-            monsterCoundText.text = $"남은 몬스터 : {monCurrent} / {monMax}";
+            monsterCoundText.text = $"잡은 몬스터 : {monCurrent} / {monMax}";
         }
     }
 }

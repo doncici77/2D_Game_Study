@@ -540,7 +540,7 @@ MonoBehaviour:
   grapplePoint: {x: 0, y: 0}
   grappleDistanceVector: {x: 0, y: 0}
   playerMovement: {fileID: 2504850728752853639}
-  impulseForce: 9
+  impulseForce: 10
 --- !u!1 &7728361095581522651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1063,7 +1063,6 @@ MonoBehaviour:
   maxHp: 50
   currentHp: 100
   damage: 10
-  attackSpeed: 1
   moveSpeed: 3
   skillType: 1
   weaponType: 0

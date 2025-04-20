@@ -63,17 +63,6 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void UpgradeAttackSpeed()
-    {
-        UpdateUI();
-        int cost = GetCost(baseAttackSpeedCost, attackSpeedUpgradeCount);
-        if (GameManager.instance.UseCoin(cost))
-        {
-            playerStats.UpgradeAttackSpeed(attackSpeedUpgradeAmount);
-            attackSpeedUpgradeCount++;
-        }
-    }
-
     public void UpgradeMoveSpeed()
     {
         UpdateUI();
@@ -104,7 +93,6 @@ public class ShopManager : MonoBehaviour
             playerStats.damage = defaultDamage;
             playerStats.maxHp = defaultMaxHp;
             playerStats.moveSpeed = defaultMoveSpeed;
-            playerStats.attackSpeed = defaultAttackSpeed;
 
             GameManager.instance.SavePlayerStats(playerStats);
         }

@@ -153,7 +153,7 @@ public class LongEnemy : MonoBehaviour
     {
         if (collision.CompareTag("PlayerAttack"))
         {
-            TakeDamage(1);
+            TakeDamage(3);
             collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
         }
     }
