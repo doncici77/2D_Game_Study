@@ -69,7 +69,7 @@ public class PlayerStats : MonoBehaviour
         weaponType = weapon;
     }
 
-    public void TakeDamage(int amount)
+    public int TakeDamage(int amount)
     {
         currentHp -= amount;
 
@@ -77,6 +77,8 @@ public class PlayerStats : MonoBehaviour
         {
             StartCoroutine(Die());
         }
+
+        return currentHp;
     }
 
     public void Heal(int amount)

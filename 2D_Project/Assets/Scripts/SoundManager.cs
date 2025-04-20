@@ -205,5 +205,6 @@ public enum SFXType
     EnemyDead,
     PlayerDead,
     Dash,
-    Rope
+    Rope,
+    EnemyThrow
 }

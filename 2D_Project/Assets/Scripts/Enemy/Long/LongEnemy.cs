@@ -161,27 +161,30 @@ public class LongEnemy : MonoBehaviour
     // ----- 피격 처리 -----
     public void TakeDamage(float amount)
     {
-        StartCoroutine(ChangeColorTemporarily());
         Hp = Mathf.Max(0, Hp - amount);
         healthBar.UpdateHealthBar(Hp, maxHp);
-        StartCoroutine(Die());
+
+        if (Hp <= 0)
+        {
+            StartCoroutine(Die());
+            return;
+        }
+
+        StartCoroutine(ChangeColorTemporarily());
     }
 
     // ----- 사망 처리 -----
     IEnumerator Die()
     {
-        if (Hp <= 0)
-        {
-            PlayerStats.Instance.Killed();
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            GetComponent<EnemyAni>().Dead();
-            isDead = true;
+        PlayerStats.Instance.Killed();
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        GetComponent<EnemyAni>().Dead();
+        isDead = true;
 
-            yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f);
 
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 
     // ----- 피격 시 색상 변화 -----
@@ -198,6 +201,7 @@ public class LongEnemy : MonoBehaviour
         GameObject enemyBullet = BulletPool.Instance.Get("EnemyBullet");
         enemyBullet.transform.position = transform.position;
         enemyBullet.GetComponent<EnemyBullet>().SetBullet(player.position);
+        SoundManager.Instance.PlaySFX(SFXType.EnemyThrow);
     }
 
     // ----- 공격 루틴 -----

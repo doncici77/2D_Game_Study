@@ -162,6 +162,10 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvincible)
         {
+            if(PlayerStats.Instance.TakeDamage(10) <= 0)
+            {
+                return;
+            }
             GenerateCameraImpulse();
             SoundManager.Instance.PlaySFX(SFXType.TakeDamage);
             animator.SetTrigger("Hit");
@@ -172,8 +176,6 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
             StartCoroutine(KnockbackCoroutine());
-
-            PlayerStats.Instance.TakeDamage(10);
         }
     }
 

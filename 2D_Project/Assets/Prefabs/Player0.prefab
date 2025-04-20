@@ -540,7 +540,7 @@ MonoBehaviour:
   grapplePoint: {x: 0, y: 0}
   grappleDistanceVector: {x: 0, y: 0}
   playerMovement: {fileID: 2504850728752853639}
-  impulseForce: 5
+  impulseForce: 9
 --- !u!1 &7728361095581522651
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  dashingPower: 24
+  dashingPower: 15
 --- !u!114 &3404602652116827217
 MonoBehaviour:
   m_ObjectHideFlags: 0
