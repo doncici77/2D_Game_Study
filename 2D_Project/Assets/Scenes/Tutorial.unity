@@ -98028,6 +98028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAttackEffectPrefab: {fileID: 2149811710499471747, guid: dbde616187fba1d4ba79243399d01189, type: 3}
   playerDamageEffectPrefab: {fileID: 31075393638486406, guid: 5bb6e62d7b24ac241beb15e20daf7ced, type: 3}
+  EffectPrefabEffectPrefab: {fileID: 4208719155666338567, guid: ab7785b51bef81046a906647ad6aaed9, type: 3}
   poolSize: 5
 --- !u!4 &1323932310
 Transform:

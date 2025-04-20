@@ -9,6 +9,7 @@ public class Map : MonoBehaviour
     private int mapMonCount;
 
     private int currentKillCount;
+    private bool isWallOpened = false;
 
     private void OnEnable()
     {
@@ -22,28 +23,38 @@ public class Map : MonoBehaviour
 
     private void Update()
     {
-        if(PlayerStats.Instance.killcount - currentKillCount == mapMonCount)
+        if (!isWallOpened && PlayerStats.Instance.killcount - currentKillCount == mapMonCount)
         {
-            foreach(GameObject wall in walls)
+            foreach (GameObject wall in walls)
             {
                 wall.SetActive(false);
             }
+            isWallOpened = true;
         }
+    }
+
+    public (int, int) GetMonCountData()
+    {
+        return (PlayerStats.Instance.killcount - currentKillCount, mapMonCount);
     }
 
     IEnumerator spawnMon()
     {
+        // 챕터 씬에서 테스트할때 꺼놓아야 아래 코루틴이 작동함
+        /*Debug.Log("몬스터 생성 파티클 시작");
         foreach (Transform spawn in spawnPos)
         {
-            ParticleManager.Instance.ParticlePlay(ParticleType.MonsterSpwan, spawn.position, new Vector3(1, 1, 1));
-        }
+            ParticleManager.Instance.ParticlePlay(ParticleType.MonsterSpwan, spawn.position, new Vector3(4, 4, 4));
+        }*/
 
+        Debug.Log("1초 대기 시작");
         yield return new WaitForSeconds(1);
 
+        Debug.Log("몬스터 생성 시작");
+        int i = 0;
         foreach (Transform spawn in spawnPos)
         {
-            int i = 0;
-            Instantiate(monster[i % monster.Length], spawn);
+            Instantiate(monster[i % monster.Length], spawn.position, Quaternion.identity);
             i++;
         }
     }

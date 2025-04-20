@@ -24,12 +24,17 @@ public class DungeonGenerator : MonoBehaviour
     private Vector3 currentMapPos = Vector3.zero;
     private int[] roomVisit = new int[100];
     private GameObject[] rooms = new GameObject[100];
-    private int roomNumber = 50;
+    public int roomNumber = 50;
 
     private void Start()
     {
         roomVisit[roomNumber] = 1;
         rooms[roomNumber] = startMap;
+    }
+
+    public GameObject GetRoomData(int num)
+    {
+        return rooms[num];
     }
 
     public void GenerateDungeon(PortalDir dir)
