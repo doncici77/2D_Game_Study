@@ -8,6 +8,7 @@ public class ChapterUI : MonoBehaviour
     public Text monsterCoundText;
     public Text mapCountText;
     public DungeonGenerator dungeonGenerator;
+    public GameObject ClearText;
     private int currentRoomNum;
     private int monMax;
     private int monCurrent;
@@ -34,6 +35,11 @@ public class ChapterUI : MonoBehaviour
         {
             (monCurrent, monMax) = currentRoom.GetComponent<Map>().GetMonCountData();
             monsterCoundText.text = $"잡은 몬스터 : {monCurrent} / {monMax}";
+        }
+
+        if((dungeonGenerator.roomCount + 1) == 0)
+        {
+            ClearText.SetActive(true);
         }
     }
 }
