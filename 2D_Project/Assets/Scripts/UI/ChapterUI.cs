@@ -22,7 +22,7 @@ public class ChapterUI : MonoBehaviour
     private void Update()
     {
         mapNumText.text = " 맵 넘버 : " + dungeonGenerator.roomNumber;
-        mapCountText.text = "남은 맵 개수 : " + (dungeonGenerator.roomCount + 1);
+        mapCountText.text = "남은 맵 개수 : " + dungeonGenerator.roomCount;
 
         if (currentRoomNum != dungeonGenerator.roomNumber)
         {
@@ -37,7 +37,7 @@ public class ChapterUI : MonoBehaviour
             monsterCoundText.text = $"잡은 몬스터 : {monCurrent} / {monMax}";
         }
 
-        if((dungeonGenerator.roomCount + 1) == 0)
+        if(dungeonGenerator.roomCount == 0)
         {
             ClearText.SetActive(true);
         }
