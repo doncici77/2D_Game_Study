@@ -15,6 +15,7 @@ TagManager:
   - RightPortal
   - Bullet
   - LongEnemy
+  - Heal
   layers:
   - Default
   - TransparentFX

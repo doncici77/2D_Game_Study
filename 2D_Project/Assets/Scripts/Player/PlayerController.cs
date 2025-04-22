@@ -140,6 +140,14 @@ public class PlayerController : MonoBehaviour
             canGoingNextScene = true;
         }
 
+        if (collision.CompareTag("Heal"))
+        {
+            collision.gameObject.SetActive(false);
+            SoundManager.Instance.PlaySFX(SFXType.Heal);
+            ParticleManager.Instance.ParticlePlay(ParticleType.PlayerHeal, transform.position, new Vector3(1.5f, 1.5f, 1.5f));
+            PlayerStats.Instance.Heal(10);
+        }
+
         if (collision.CompareTag("LeftPortal"))
         {
             dungeonGenerator.GenerateDungeon(PortalDir.left);

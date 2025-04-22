@@ -713,6 +713,7 @@ MonoBehaviour:
   - {fileID: 6685893557613125778}
   - {fileID: 3023129122829882078}
   - {fileID: 4268446976913984759}
+  healPrefab: {fileID: 522612983232454545, guid: ff694db7c211de040903c3f767bf75b9, type: 3}
 --- !u!1 &6292547094724021367
 GameObject:
   m_ObjectHideFlags: 0

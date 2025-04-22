@@ -6,6 +6,7 @@ public class Map : MonoBehaviour
     public GameObject[] walls;
     public GameObject[] monster;
     public Transform[] spawnPos;
+    public GameObject healPrefab;
     private int mapMonCount;
 
     private int currentKillCount;
@@ -30,6 +31,11 @@ public class Map : MonoBehaviour
                 wall.SetActive(false);
             }
             isWallOpened = true;
+
+            foreach (Transform spawn in spawnPos)
+            {
+                Instantiate(healPrefab, spawn.position, Quaternion.identity);
+            }
         }
     }
 

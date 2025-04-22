@@ -13,6 +13,7 @@ public class ParticleManager : MonoBehaviour
     public GameObject playerAttackEffectPrefab;
     public GameObject playerDamageEffectPrefab;
     public GameObject EffectPrefabEffectPrefab;
+    public GameObject HealPrefab;
     public int poolSize = 10;
 
     private void Awake()
@@ -27,6 +28,7 @@ public class ParticleManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        particlePrefabDic.Add(ParticleType.PlayerHeal, HealPrefab);
         particlePrefabDic.Add(ParticleType.PlayerAttack, playerAttackEffectPrefab);
         particlePrefabDic.Add(ParticleType.PlayerDamage, playerDamageEffectPrefab);
         particlePrefabDic.Add(ParticleType.MonsterSpwan, EffectPrefabEffectPrefab);
@@ -103,5 +105,6 @@ public enum ParticleType
 {
     PlayerAttack,
     PlayerDamage,
-    MonsterSpwan
+    MonsterSpwan,
+    PlayerHeal
 }
