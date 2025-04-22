@@ -41,9 +41,4 @@ public class UIManager : MonoBehaviour
             wLong.SetActive(true);
         }
     }
-
-    public void Dead(bool set)
-    {
-        dead.SetActive(set);
-    }
 }

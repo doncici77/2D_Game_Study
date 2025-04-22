@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum SkillType
 {
@@ -27,6 +28,8 @@ public class PlayerStats : MonoBehaviour
     public WeaponType weaponType = WeaponType.Short;
     public bool isDead = false;
     public UIManager uiManager;
+    public Image fadeImage;
+    public Text deathText;
 
     public int killcount = 0;
 
@@ -99,14 +102,41 @@ public class PlayerStats : MonoBehaviour
         SoundManager.Instance.PlaySFX(SFXType.PlayerDead);
 
         yield return new WaitForSeconds(2f);
-        uiManager.Dead(true);
+
+        fadeImage.gameObject.SetActive(true);
+        deathText.gameObject.SetActive(true);
+
+        float fadeDuration = 2.0f; // 페이드 효과 시간
+        float elapsed = 0f;
+
+        // 화면이 검게 변함
+        while (elapsed < fadeDuration)
+        {
+            float alpha = elapsed / fadeDuration;
+            fadeImage.color = new Color(0, 0, 0, alpha);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        fadeImage.color = new Color(0, 0, 0, 1); // 완전 검게
+
+        yield return new WaitForSeconds(0.5f);
+
+        // "YOU DIED" 텍스트 서서히 나타남
+        elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            float alpha = elapsed / fadeDuration;
+            deathText.color = new Color(1, 0, 0, alpha);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        deathText.color = new Color(1, 0, 0, 1); // 완전 빨간색
 
         yield return new WaitForSeconds(1f);
 
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         GetComponent<Collider2D>().enabled = true;
         isDead = false;
-        uiManager.Dead(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //현재 씬 다시 불러오기
     }
 
