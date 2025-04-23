@@ -25,11 +25,20 @@ public class DungeonGenerator : MonoBehaviour
     private int[] roomVisit = new int[100];
     private GameObject[] rooms = new GameObject[100];
     public int roomNumber = 50;
+    public GameObject endPortal;
 
     private void Start()
     {
         roomVisit[roomNumber] = 1;
         rooms[roomNumber] = startMap;
+    }
+
+    private void Update()
+    {
+        if(roomCount == 0)
+        {
+            endPortal.SetActive(true);
+        }
     }
 
     public GameObject GetRoomData(int num)

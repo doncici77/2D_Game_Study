@@ -60,7 +60,6 @@ public class PlayerAttack : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(attackPos.position, direction, Mathf.Infinity, layerMask);
         Debug.DrawRay(attackPos.position, direction, Color.yellow, 3f);
-        Debug.Log("hit : " + hit.transform.gameObject.layer);
         if (hit.transform.gameObject.layer == 3)
         {
             bullet = BulletPool.Instance.Get("Bullet");
