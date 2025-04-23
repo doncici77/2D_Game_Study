@@ -528,8 +528,8 @@ MonoBehaviour:
   m_rigidbody: {fileID: 3582770695361284351}
   hasMaxDistance: 1
   maxDistnace: 20
-  launchSpeed: 3
-  targetDistance: 5
+  launchSpeed: 5
+  targetDistance: 3
   grapplePoint: {x: 0, y: 0}
   grappleDistanceVector: {x: 0, y: 0}
   playerMovement: {fileID: 2504850728752853639}
@@ -664,7 +664,7 @@ GameObject:
   - component: {fileID: 2374616189796358387}
   - component: {fileID: 1373314092112783562}
   - component: {fileID: 268833740221773272}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -783,8 +783,8 @@ MonoBehaviour:
   knockbackDuration: 0.2
   pauseMenuUI: {fileID: 0}
   shakeDuration: 0.5
-  shakeMagnitude: 0.05
-  delayTime: 0.15
+  shakeMagnitude: 0.1
+  delayTime: 0.1
   impulseSource: {fileID: 0}
   dungeonGenerator: {fileID: 0}
 --- !u!114 &2504850728752853639
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 50
-  currentHp: 100
+  currentHp: 50
   damage: 10
   moveSpeed: 3
   skillType: 1

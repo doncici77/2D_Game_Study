@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 101336848}
   - component: {fileID: 101336849}
   - component: {fileID: 101336850}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TutorialEvent3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 11.375078, y: 0}
+  m_Offset: {x: 10.744791, y: -0.10521531}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -575,7 +575,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 6.8831444, y: 1}
+  m_Size: {x: 8.143719, y: 0.7895689}
   m_EdgeRadius: 0
 --- !u!114 &101336850
 MonoBehaviour:
@@ -1377,7 +1377,7 @@ GameObject:
   - component: {fileID: 481592206}
   - component: {fileID: 481592208}
   - component: {fileID: 481592207}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TutorialEvent8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1446,7 +1446,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 10.7565, y: 0}
+  m_Offset: {x: 11.838646, y: -0.11093712}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1456,7 +1456,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 26.419067, y: 1}
+  m_Size: {x: 28.583359, y: 0.77812576}
   m_EdgeRadius: 0
 --- !u!1 &508149624
 GameObject:
@@ -2730,7 +2730,7 @@ GameObject:
   - component: {fileID: 760781812}
   - component: {fileID: 760781814}
   - component: {fileID: 760781813}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TutorialEvent5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2799,7 +2799,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 7.487854, y: 0}
+  m_Offset: {x: 7.487854, y: -0.15092206}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2809,7 +2809,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 25.590408, y: 1}
+  m_Size: {x: 25.590408, y: 0.6981554}
   m_EdgeRadius: 0
 --- !u!1 &765545149
 GameObject:
@@ -97473,7 +97473,7 @@ GameObject:
   - component: {fileID: 1024191619}
   - component: {fileID: 1024191620}
   - component: {fileID: 1024191621}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TutorialEvent1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97529,7 +97529,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.7694879, y: 0}
+  m_Offset: {x: 1.7694879, y: -0.011200666}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -97539,7 +97539,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 11.042851, y: 1}
+  m_Size: {x: 11.042851, y: 0.9775996}
   m_EdgeRadius: 0
 --- !u!114 &1024191621
 MonoBehaviour:
@@ -98364,7 +98364,7 @@ GameObject:
   - component: {fileID: 1291909513}
   - component: {fileID: 1291909515}
   - component: {fileID: 1291909514}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TutorialEvent6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98433,7 +98433,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 4.508072, y: 0}
+  m_Offset: {x: 4.508072, y: -0.1100862}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -98443,7 +98443,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 19.630844, y: 1}
+  m_Size: {x: 19.630844, y: 0.7798281}
   m_EdgeRadius: 0
 --- !u!1 &1320516575
 GameObject:
@@ -98794,7 +98794,7 @@ GameObject:
   - component: {fileID: 1516560551}
   - component: {fileID: 1516560552}
   - component: {fileID: 1516560553}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TutorialEvent2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98850,7 +98850,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.58057046, y: 0}
+  m_Offset: {x: -0.6018131, y: -0.082798004}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -98860,7 +98860,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.7093282, y: 1}
+  m_Size: {x: 5.8761115, y: 0.83440495}
   m_EdgeRadius: 0
 --- !u!114 &1516560553
 MonoBehaviour:
@@ -99850,7 +99850,7 @@ GameObject:
   - component: {fileID: 2009864982}
   - component: {fileID: 2009864984}
   - component: {fileID: 2009864983}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TutorialEvent4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99919,7 +99919,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 11.375078, y: 0}
+  m_Offset: {x: 11.319805, y: -0.17579675}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -99929,7 +99929,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 6.8831444, y: 1}
+  m_Size: {x: 9.196777, y: 0.64840984}
   m_EdgeRadius: 0
 --- !u!1 &2027663713
 GameObject:
@@ -100067,7 +100067,7 @@ GameObject:
   - component: {fileID: 2068676966}
   - component: {fileID: 2068676968}
   - component: {fileID: 2068676967}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TutorialEvent7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100136,7 +100136,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -1.0751343, y: 0}
+  m_Offset: {x: -1.0751343, y: -0.07274008}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -100146,7 +100146,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.7557983, y: 1}
+  m_Size: {x: 2.7557983, y: 0.85451984}
   m_EdgeRadius: 0
 --- !u!1 &2084086279
 GameObject:

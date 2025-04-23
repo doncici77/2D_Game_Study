@@ -11,6 +11,7 @@ public class ClearPortal : MonoBehaviour
     public GameObject camera;
     public Collider2D cinePoly;
     public GameObject thankText;
+    public GameObject clearText;
 
     private void Update()
     {
@@ -37,9 +38,10 @@ public class ClearPortal : MonoBehaviour
 
         yield return StartCoroutine(TeleportMap());
 
-        yield return StartCoroutine(FadeManager.instance.FadeOut());
-
         thankText.SetActive(true);
+        clearText.SetActive(false);
+
+        yield return StartCoroutine(FadeManager.instance.FadeOut());
     }
 
     IEnumerator TeleportMap()

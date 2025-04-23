@@ -13,6 +13,7 @@ public class ChapterUI : MonoBehaviour
     private int monMax;
     private int monCurrent;
     private GameObject currentRoom;
+    private bool isTextOn = true;
 
     private void Start()
     {
@@ -37,8 +38,9 @@ public class ChapterUI : MonoBehaviour
             monsterCoundText.text = $"잡은 몬스터 : {monCurrent} / {monMax}";
         }
 
-        if(dungeonGenerator.roomCount == 0)
+        if(dungeonGenerator.roomCount == 0 && isTextOn)
         {
+            isTextOn = false;
             ClearText.SetActive(true);
         }
     }
