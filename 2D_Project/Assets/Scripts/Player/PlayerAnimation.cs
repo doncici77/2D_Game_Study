@@ -74,6 +74,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void PlaySoundJump()
     {
+        Debug.Log("점프 사운드 호출");
         SoundManager.Instance.PlaySFX(SFXType.Jump);
     }
 

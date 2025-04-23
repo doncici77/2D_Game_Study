@@ -31,6 +31,8 @@ public class DungeonGenerator : MonoBehaviour
     {
         roomVisit[roomNumber] = 1;
         rooms[roomNumber] = startMap;
+
+        SoundManager.Instance.PlayBGM(BGMType.Boss);
     }
 
     private void Update()

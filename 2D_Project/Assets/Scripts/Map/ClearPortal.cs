@@ -68,5 +68,7 @@ public class ClearPortal : MonoBehaviour
         confiner.gameObject.SetActive(false);
         yield return null;
         confiner.gameObject.SetActive(true);
+
+        SoundManager.Instance.PlayBGM(BGMType.Clear);
     }
 }

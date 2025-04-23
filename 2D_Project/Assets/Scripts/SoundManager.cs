@@ -188,7 +188,8 @@ public enum BGMType
 {
     Boss, 
     Tutorial,
-    Menu
+    Menu,
+    Clear
 }
 
 public enum SFXType
