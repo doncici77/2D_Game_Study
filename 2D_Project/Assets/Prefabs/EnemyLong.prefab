@@ -660,7 +660,7 @@ MonoBehaviour:
   wallCheckRight: {fileID: 3963070645487789797}
   wallCheckLeft: {fileID: 7246517128501082710}
   player: {fileID: 0}
-  attackRange: 10
+  attackRange: 20
   isAttacking: 0
   colorChangeDuration: 0.5
   maxDistance: 3

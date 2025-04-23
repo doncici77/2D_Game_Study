@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
     public Transform wallCheckLeft;
     private bool isWall = false;
     private bool isDead = false;
+    private bool canDamage = true;
 
     [Header("추적 및 공격 관련")]
     public Transform player;
@@ -181,8 +182,13 @@ public class EnemyManager : MonoBehaviour
     {
         if (collision.CompareTag("PlayerAttack"))
         {
-            TakeDamage(3);
-            collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
+            if (canDamage == true)
+            {
+                canDamage = false;
+                TakeDamage(3);
+                collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
+                StartCoroutine(DamageDelay());
+            }
         }
 
         if (collision.CompareTag("Player") && isAttacking)
@@ -197,6 +203,12 @@ public class EnemyManager : MonoBehaviour
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage();
         }
+    }
+
+    IEnumerator DamageDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        canDamage = true;
     }
 
     // ----- 피격 처리 -----

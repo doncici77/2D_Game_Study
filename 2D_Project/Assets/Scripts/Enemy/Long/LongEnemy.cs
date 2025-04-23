@@ -19,6 +19,7 @@ public class LongEnemy : MonoBehaviour
     public Transform wallCheckLeft;
     private bool isWall = false;
     private bool isDead = false;
+    private bool canDamage = true;
 
     [Header("추적 및 공격 관련")]
     public Transform player;
@@ -153,9 +154,20 @@ public class LongEnemy : MonoBehaviour
     {
         if (collision.CompareTag("PlayerAttack"))
         {
-            TakeDamage(3);
-            collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
+            if (canDamage == true)
+            {
+                canDamage = false;
+                TakeDamage(3);
+                collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
+                StartCoroutine(DamageDelay());
+            }
         }
+    }
+
+    IEnumerator DamageDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        canDamage = true;
     }
 
     // ----- 피격 처리 -----

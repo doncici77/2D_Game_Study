@@ -892,7 +892,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 1.2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -969,7 +969,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 15
+  m_SortingOrder: 10
   m_Time: 0.5
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -1063,4 +1063,6 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   fadeImage: {fileID: 0}
   deathText: {fileID: 0}
+  canPuase: 1
+  isPaused: 0
   killcount: 0
