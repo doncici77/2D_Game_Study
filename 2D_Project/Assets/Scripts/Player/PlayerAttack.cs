@@ -91,6 +91,7 @@ public class PlayerAttack : MonoBehaviour
             else if(PlayerStats.Instance.weaponType == WeaponType.Long)
             {
                 Shooting();
+                playerAnimation.EndAttack();
             }
         }
     }
