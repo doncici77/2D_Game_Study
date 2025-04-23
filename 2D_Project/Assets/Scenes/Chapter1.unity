@@ -551,7 +551,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 34
-    OrthographicSize: 10
+    OrthographicSize: 12
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -801,10 +801,9 @@ MonoBehaviour:
   roomPrefabs:
   - {fileID: 6244276965524714279, guid: 447e041c66b5aa54c906f907ad7ac487, type: 3}
   - {fileID: 5535094698296245419, guid: d66a5421c5d57944287b7da2f59196d0, type: 3}
-  - {fileID: 5535094698296245419, guid: d66a5421c5d57944287b7da2f59196d0, type: 3}
   - {fileID: 1856734966871183390, guid: ee4ee4aa0776bf8469ae756736297473, type: 3}
   startMap: {fileID: 7557678606767587252}
-  roomCount: 4
+  roomCount: 3
   playerPos: {fileID: 497164214}
   confiner: {fileID: 128805800}
   camera: {fileID: 945654480}
@@ -1142,6 +1141,7 @@ MonoBehaviour:
   playerPos: {fileID: 497164214}
   camera: {fileID: 945654480}
   cinePoly: {fileID: 7564653310612928971}
+  thankText: {fileID: 1083223517}
 --- !u!1 &372144947
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,7 +2187,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 12
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2394,6 +2394,85 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1083223517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1083223520}
+  - component: {fileID: 1083223519}
+  - component: {fileID: 1083223518}
+  m_Layer: 5
+  m_Name: ThankText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1083223518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083223517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.88550174, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 4b7113f342eb4b34aa4ea595d7146557, type: 3}
+    m_FontSize: 70
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 5
+    m_MaxSize: 70
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\uB561\uD050 \uD3EC \uD50C\uB808\uC789"
+--- !u!222 &1083223519
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083223517}
+  m_CullTransparentMesh: 1
+--- !u!224 &1083223520
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083223517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135670486419029265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -71, y: -398}
+  m_SizeDelta: {x: 471.49, y: 208.37}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1098095391
 GameObject:
   m_ObjectHideFlags: 0
@@ -3774,6 +3853,7 @@ RectTransform:
   - {fileID: 4320632}
   - {fileID: 959767816}
   - {fileID: 1571031452}
+  - {fileID: 1083223520}
   - {fileID: 3211688379802599880}
   - {fileID: 662953041}
   m_Father: {fileID: 0}
@@ -18462,7 +18542,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9006701473507871372}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1608617997}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4141336788954988768
 GameObject:
   m_ObjectHideFlags: 0

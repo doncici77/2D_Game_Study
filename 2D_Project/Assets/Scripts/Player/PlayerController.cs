@@ -121,6 +121,11 @@ public class PlayerController : MonoBehaviour
         PlayerStats.Instance.isPaused = false;
     }
 
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Coin"))
