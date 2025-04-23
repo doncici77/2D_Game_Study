@@ -34,11 +34,19 @@ public class SoundUI : MonoBehaviour
 
     public void OnSoundSetting()
     {
+        if(PlayerStats.Instance != null)
+        {
+            PlayerStats.Instance.canPuase = false;
+        }
         SoundUISet.SetActive(true);
     }
 
     public void OffSoundSetting()
     {
+        if (PlayerStats.Instance != null)
+        {
+            PlayerStats.Instance.canPuase = true;
+        }
         SoundUISet.SetActive(false);
     }
 }

@@ -71,7 +71,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void PerformAttack()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (PlayerStats.Instance.isPaused == false && Input.GetButtonDown("Fire1"))
         {
             if (PlayerStats.Instance.weaponType == WeaponType.Short)
             {

@@ -47,11 +47,11 @@ public class Map : MonoBehaviour
     IEnumerator spawnMon()
     {
         // 챕터 씬에서 테스트할때 꺼놓아야 아래 코루틴이 작동함
-        /*Debug.Log("몬스터 생성 파티클 시작");
+        Debug.Log("몬스터 생성 파티클 시작");
         foreach (Transform spawn in spawnPos)
         {
             ParticleManager.Instance.ParticlePlay(ParticleType.MonsterSpwan, spawn.position, new Vector3(4, 4, 4));
-        }*/
+        }
 
         Debug.Log("1초 대기 시작");
         yield return new WaitForSeconds(1);

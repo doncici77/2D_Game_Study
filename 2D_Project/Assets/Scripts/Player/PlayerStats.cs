@@ -30,6 +30,8 @@ public class PlayerStats : MonoBehaviour
     public UIManager uiManager;
     public Image fadeImage;
     public Text deathText;
+    public bool canPuase = true;
+    public bool isPaused = false;
 
     public int killcount = 0;
 

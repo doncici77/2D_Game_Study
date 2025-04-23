@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     public float knockbackDuration = 0.2f;
 
     private Vector3 startPlayerPos;
-    private bool isPaused = false;
     public GameObject pauseMenuUI;
 
     public float shakeDuration = 0.5f;
@@ -76,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (isPaused)
+            if (PlayerStats.Instance.isPaused == true && PlayerStats.Instance.canPuase == true)
             {
                 ReGame();
             }
@@ -112,14 +111,14 @@ public class PlayerController : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        isPaused = true;
+        PlayerStats.Instance.isPaused = true;
     }
 
     public void ReGame()
     {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1.0f;
-        isPaused = false;
+        PlayerStats.Instance.isPaused = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
