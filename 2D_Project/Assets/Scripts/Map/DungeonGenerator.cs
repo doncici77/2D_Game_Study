@@ -73,10 +73,8 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         if (child.CompareTag("RightPortal"))
                         {
-                            child.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
-                            child.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                            playerPos.position = new Vector3(playerPos.position.x - 3, playerPos.position.y);
-                            roomNumber--;
+                            StartCoroutine(TeleportStartMap("Right"));
+                            roomNumber = 50;
                             break;
                         }
                     }
@@ -108,10 +106,8 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         if (child.CompareTag("LeftPortal"))
                         {
-                            child.gameObject.GetComponent<BoxCollider2D>().isTrigger = false;
-                            child.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                            playerPos.position = new Vector3(playerPos.position.x + 3, playerPos.position.y);
-                            roomNumber++;
+                            StartCoroutine(TeleportStartMap("Left"));
+                            roomNumber = 50;
                             break;
                         }
                     }
@@ -124,6 +120,37 @@ public class DungeonGenerator : MonoBehaviour
             Debug.Log("RoomNumber : " + roomNumber);
         }
 
+    }
+
+    IEnumerator TeleportStartMap(string direction)
+    {
+        // 플레이어 위치 설정
+        Transform spawnPos = rooms[50].transform.Find("SpawnPos" + direction);
+
+        // Cinemachine 설정 초기화
+        camera.GetComponent<CinemachineBrain>().enabled = false;
+
+        playerPos.position = spawnPos.position;
+
+        // Confiner 설정 초기화
+        confiner.BoundingShape2D = null;
+        confiner.InvalidateBoundingShapeCache();
+        confiner.gameObject.GetComponent<CinemachineCamera>().Target.TrackingTarget = null;
+
+        // 1 프레임 대기
+        yield return null;
+
+        // 새로운 위치에 맞게 재설정
+        confiner.gameObject.GetComponent<CinemachineCamera>().Target.TrackingTarget = playerPos;
+        confiner.BoundingShape2D = rooms[50].transform.Find("CinemachinePoly").GetComponent<Collider2D>();
+        confiner.InvalidateBoundingShapeCache();
+
+        // 카메라 재활성화
+        camera.GetComponent<CinemachineBrain>().enabled = true;
+
+        confiner.gameObject.SetActive(false);
+        yield return null;
+        confiner.gameObject.SetActive(true);
     }
 
     IEnumerator TeleportMap(string direction)

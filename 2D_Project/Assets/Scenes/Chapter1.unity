@@ -803,7 +803,7 @@ MonoBehaviour:
   - {fileID: 5535094698296245419, guid: d66a5421c5d57944287b7da2f59196d0, type: 3}
   - {fileID: 1856734966871183390, guid: ee4ee4aa0776bf8469ae756736297473, type: 3}
   startMap: {fileID: 7557678606767587252}
-  roomCount: 0
+  roomCount: 3
   playerPos: {fileID: 497164214}
   confiner: {fileID: 128805800}
   camera: {fileID: 945654480}
