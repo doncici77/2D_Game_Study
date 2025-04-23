@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
         {
             originalPos = Camera.main.transform.localPosition;
         }
+
+        Application.targetFrameRate = 60;
     }
 
     void Update()

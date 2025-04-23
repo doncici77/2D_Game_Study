@@ -3,20 +3,14 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Text coinText;
     public Slider hpSlider;
     public GameObject dash;
     public GameObject grappling;
     public GameObject wShort;
     public GameObject wLong;
-    public GameObject dead;
 
     void Update()
     {
-        if (GameManager.instance != null)
-        {
-            coinText.text = "ÄÚÀÎ : " + GameManager.instance.coinCount;
-        }
         hpSlider.value = (float)PlayerStats.Instance.currentHp / (float)PlayerStats.Instance.maxHp;
 
         if (PlayerStats.Instance.skillType == SkillType.Dash)
