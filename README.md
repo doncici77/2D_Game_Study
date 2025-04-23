@@ -1,6 +1,9 @@
 # 2D_Game_Study
  2D 게임 수업
 
+## 1차 빌드
+https://drive.google.com/drive/folders/1jc72xDoeYKFEr0w-kLNuotffK2yC7GUL?usp=drive_link
+
 ### 1일차
 - 캐릭터 리지드 바디 벨로시티를 이용한 이동 구현, 이동 애니메이션 구현, 공격 애니메이션 구현, 캐릭터 플립 구현
 - 공격 애니메이션 딜레이 추가
