@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     public DungeonGenerator dungeonGenerator;
 
+    public Tutorial_GrapplingGun grapplingGun;
+
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
@@ -141,6 +143,7 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("DeathZone"))
         {
             SoundManager.Instance.PlaySFX(SFXType.TakeDamage);
+            grapplingGun.StopGrapple();
             transform.position = startPlayerPos;
         }
 

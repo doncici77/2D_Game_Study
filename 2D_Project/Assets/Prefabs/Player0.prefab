@@ -1176,6 +1176,7 @@ MonoBehaviour:
   delayTime: 0.1
   impulseSource: {fileID: 0}
   dungeonGenerator: {fileID: 0}
+  grapplingGun: {fileID: 4855006315206120638}
 --- !u!114 &2504850728752853639
 MonoBehaviour:
   m_ObjectHideFlags: 0

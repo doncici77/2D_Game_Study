@@ -179,19 +179,6 @@ public class EnemyManager : MonoBehaviour
             TakeDamage(3);
             collision.gameObject.GetComponentInParent<PlayerController>().TakeAttack();
         }
-
-        if (collision.CompareTag("Player") && isAttacking)
-        {
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage();
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && isAttacking)
-        {
-            collision.gameObject.GetComponent<PlayerController>().TakeDamage();
-        }
     }
 
     // ----- 피격 처리 -----

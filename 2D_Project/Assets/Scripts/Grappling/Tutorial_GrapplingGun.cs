@@ -104,6 +104,15 @@ public class Tutorial_GrapplingGun : MonoBehaviour
         }
     }
 
+    public void StopGrapple()
+    {
+        grappleRope.enabled = false;
+        m_springJoint2D.enabled = false;
+        trail.emitting = false;
+
+        canImpulse = true;
+    }
+
     void RotateGun(Vector3 lookPoint)
     {
         Vector3 distanceVector = lookPoint - gunPivot.position;

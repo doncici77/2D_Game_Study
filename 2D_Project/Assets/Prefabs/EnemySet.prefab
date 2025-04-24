@@ -284,8 +284,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1294271789144146769}
-  - {fileID: 7582854365735732159}
-  - {fileID: 1043388253432299184}
+  - {fileID: 8399064028241937703}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1673176602886706522
@@ -461,6 +460,100 @@ RectTransform:
   m_AnchoredPosition: {x: -0.049999237, y: 0}
   m_SizeDelta: {x: -10.1, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3404382592099948345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8399064028241937703}
+  - component: {fileID: 5703664727717285332}
+  - component: {fileID: 6983700060033347884}
+  m_Layer: 0
+  m_Name: AttackPosSet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8399064028241937703
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404382592099948345}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7582854365735732159}
+  - {fileID: 1043388253432299184}
+  m_Father: {fileID: 7757243611314745076}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5703664727717285332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404382592099948345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b72b3c945b8be4aaf3ff29e5e842dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPos: {fileID: 1294271789144146769}
+--- !u!61 &6983700060033347884
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404382592099948345}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.041498438, y: -0.05533141}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.4743527, y: 0.7325655}
+  m_EdgeRadius: 0
 --- !u!1 &3776968809122184171
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +565,7 @@ GameObject:
   - component: {fileID: 1043388253432299184}
   - component: {fileID: 5170314028083340359}
   - component: {fileID: 6188671126927833003}
+  - component: {fileID: 2522500072748352282}
   m_Layer: 0
   m_Name: AttackRight
   m_TagString: Enemy
@@ -492,7 +586,7 @@ Transform:
   m_LocalScale: {x: 0.36088803, y: 0.48872986, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7757243611314745076}
+  m_Father: {fileID: 8399064028241937703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5170314028083340359
 SpriteRenderer:
@@ -595,6 +689,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2522500072748352282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3776968809122184171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470b38e0f3bf392458a7a75f1f9c1d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyManager: {fileID: 3257398519558593409}
 --- !u!1 &4485893178812300995
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,6 +713,7 @@ GameObject:
   - component: {fileID: 7582854365735732159}
   - component: {fileID: 253869216410310752}
   - component: {fileID: 4263441042451651307}
+  - component: {fileID: 1782680116898928971}
   m_Layer: 0
   m_Name: AttackLeft
   m_TagString: Enemy
@@ -626,7 +734,7 @@ Transform:
   m_LocalScale: {x: 0.36088803, y: 0.48872986, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7757243611314745076}
+  m_Father: {fileID: 8399064028241937703}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &253869216410310752
 SpriteRenderer:
@@ -729,6 +837,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1782680116898928971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485893178812300995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470b38e0f3bf392458a7a75f1f9c1d78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyManager: {fileID: 3257398519558593409}
 --- !u!1 &4837512673153972897
 GameObject:
   m_ObjectHideFlags: 0
