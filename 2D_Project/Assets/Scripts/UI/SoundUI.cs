@@ -8,7 +8,7 @@ public class SoundUI : MonoBehaviour
     public Slider sfxSlider;
     public Slider bgmSlider;
 
-    private void Start()
+    private void OnEnable()
     {
         sfxSlider.minValue = 0f;
         sfxSlider.maxValue = 1f;
@@ -20,6 +20,7 @@ public class SoundUI : MonoBehaviour
 
         sfxSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
         bgmSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
+        Debug.Log("SoundManager.Instance.bgmSource.volume : " + SoundManager.Instance.bgmSource.volume);
     }
 
     private void OnSFXVolumeChanged(float sfxValue)

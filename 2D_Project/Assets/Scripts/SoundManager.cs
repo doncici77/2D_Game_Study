@@ -34,8 +34,8 @@ public class SoundManager : MonoBehaviour
         GameObject bgmObj = new GameObject("BGM");
         SoundManager.Instance.bgmSource = bgmObj.AddComponent<AudioSource>();
         bgmObj.transform.SetParent(obj.transform);
-        SoundManager.Instance.bgmSource.loop = true;
         SoundManager.Instance.bgmSource.volume = PlayerPrefs.GetFloat("BGMVolume", 1.0f);
+        SoundManager.Instance.bgmSource.loop = true;
 
         //SFX ¼³Á¤
         GameObject sfxObj = new GameObject("SFX");
