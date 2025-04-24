@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public float dashingPower = 24f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
+    private bool isJumping = false;
 
     private TrailRenderer tr;
 
@@ -132,15 +133,17 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerAnimation.SetJumping(true);
-        }
-        else if (!isGrounded && rb.linearVelocity.y < -0.1f)
-        {
-            playerAnimation.SetFalling(true);
+            isJumping = true;
         }
         else if (isGrounded && !Input.GetKey(KeyCode.Mouse1))
         {
             playerAnimation.PlayLanding();
             isGrapple = false;
+        }
+        else
+        {
+            playerAnimation.SetFalling(true);
+            isJumping = false;
         }
 
         // 그래플 중일 때도 낙하 처리

@@ -52,7 +52,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         Debug.Log("roomCount : " + roomCount);
 
-        int randMapType = Random.Range(0, roomPrefabs.Length);
+        // int randMapType = Random.Range(0, roomPrefabs.Length);
         if (dir == PortalDir.right)
         {
             roomNumber++;
@@ -63,7 +63,7 @@ public class DungeonGenerator : MonoBehaviour
                 if (roomCount > 0)
                 {
                     roomVisit[roomNumber] = 1;
-                    StartCoroutine(CreateMap(randMapType, "Left"));
+                    StartCoroutine(CreateMap(roomCount - 1, "Left"));
 
                     roomCount--;
                 }
@@ -96,7 +96,7 @@ public class DungeonGenerator : MonoBehaviour
                 if (roomCount > 0)
                 {
                     roomVisit[roomNumber] = 1;
-                    StartCoroutine(CreateMap(randMapType, "Right"));
+                    StartCoroutine(CreateMap(roomCount - 1, "Right"));
 
                     roomCount--;
                 }
@@ -186,6 +186,7 @@ public class DungeonGenerator : MonoBehaviour
 
     IEnumerator CreateMap(int randMapType, string direction)
     {
+        Debug.Log("¸Ê »ý¼º : " + (roomCount - 1));
         GameObject newMap = Instantiate(roomPrefabs[randMapType], currentMapPos, Quaternion.identity);
         rooms[roomNumber] = newMap;
 
