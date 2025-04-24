@@ -15,14 +15,14 @@ public class Tutorial_GrapplingGun : MonoBehaviour
     public Rigidbody2D m_rigidbody;
 
     [Header("Distance:")]
-    [SerializeField] private bool hasMaxDistance = false;
-    [SerializeField] private float maxDistnace = 20;
+    public bool hasMaxDistance = false;
+    public float maxDistnace = 20;
 
     [Header("Launching:")]
-    [SerializeField] private float launchSpeed = 1;
+    public float launchSpeed = 1;
 
     [Header("No Launch To Point")]
-    [SerializeField] private float targetDistance = 3;
+    public float targetDistance = 3;
 
     [HideInInspector] public Vector2 grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
@@ -53,7 +53,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
             {
                 if (grappleRope.enabled)
                 {
-                    RotateGun(grapplePoint, false);
+                    RotateGun(grapplePoint);
 
                     // E 키: 오른쪽 방향으로 힘
                     if (Input.GetKeyDown(KeyCode.E) && canImpulse)
@@ -72,7 +72,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
                 else
                 {
                     Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-                    RotateGun(mousePos, true);
+                    RotateGun(mousePos);
                 }
             }
             else if (Input.GetKeyUp(KeyCode.Mouse1))
@@ -85,7 +85,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
             else
             {
                 Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
-                RotateGun(mousePos, true);
+                RotateGun(mousePos);
             }
         }
 
@@ -98,7 +98,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
         }
     }
 
-    void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
+    void RotateGun(Vector3 lookPoint)
     {
         Vector3 distanceVector = lookPoint - gunPivot.position;
 
