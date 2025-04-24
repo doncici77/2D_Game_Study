@@ -1,7 +1,7 @@
 # 2D_Game_Study
  2D 게임 수업
 
-## 1차 빌드
+## 결과물
 https://drive.google.com/drive/folders/1jc72xDoeYKFEr0w-kLNuotffK2yC7GUL?usp=drive_link
 
 ### 1일차
