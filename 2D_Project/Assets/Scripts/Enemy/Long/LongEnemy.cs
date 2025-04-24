@@ -100,33 +100,14 @@ public class LongEnemy : MonoBehaviour
 
     void WallCheck()
     {
-        if (direction == 1)
-        {
-            isWall = Physics2D.OverlapCircle(wallCheckRight.position, 0.1f, LayerMask.GetMask("Ground"));
+        isWall = false; // 초기화
 
-            if (isWall)
-            {
-                direction = -1;
-                GetComponent<SpriteRenderer>().flipX = true;
-            }
-            else
-            {
-                isWall = false;
-            }
-        }
-        else if (direction == -1)
+        if (Physics2D.OverlapCircle(wallCheckRight.position, 0.1f, LayerMask.GetMask("Ground")) ||
+            Physics2D.OverlapCircle(wallCheckLeft.position, 0.1f, LayerMask.GetMask("Ground")))
         {
-            isWall = Physics2D.OverlapCircle(wallCheckLeft.position, 0.1f, LayerMask.GetMask("Ground"));
-
-            if (isWall)
-            {
-                direction = 1;
-                GetComponent<SpriteRenderer>().flipX = false;
-            }
-            else
-            {
-                isWall = false;
-            }
+            isWall = true;
+            direction = direction * -1;
+            GetComponent<SpriteRenderer>().flipX = !GetComponent<SpriteRenderer>().flipX;
         }
     }
 
@@ -146,7 +127,6 @@ public class LongEnemy : MonoBehaviour
         }
 
         transform.position += new Vector3(speed * direction * Time.deltaTime, 0, 0);
-
     }
 
     // ----- 충돌 처리 -----

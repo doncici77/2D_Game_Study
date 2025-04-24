@@ -27,7 +27,6 @@ public class Tutorial_GrapplingGun : MonoBehaviour
     [HideInInspector] public Vector2 grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
 
-    public PlayerMovement playerMovement;
     public float impulseForce = 5f; // 순간 힘의 세기
     private bool canImpulse = true;
 

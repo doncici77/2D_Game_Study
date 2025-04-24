@@ -93,22 +93,24 @@ public class EnemyManager : MonoBehaviour
 
         if (distanceToPlayer <= chaseRange)
         {
-            if (transform.position.x > player.position.x)
+            if (Mathf.Abs(transform.position.y - player.position.y) <= 1)
             {
-                direction = -1;
-                GetComponent<SpriteRenderer>().flipX = true;
+                if (transform.position.x > player.position.x && direction != -1)
+                {
+                    direction = -1;
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
+                else if (transform.position.x < player.position.x && direction != 1)
+                {
+                    direction = 1;
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
+                transform.position += new Vector3(speed * direction * Time.deltaTime, 0, 0);
+                return;
             }
-            else if (transform.position.x < player.position.x)
-            {
-                direction = 1;
-                GetComponent<SpriteRenderer>().flipX = false;
-            }
-
-            transform.position += new Vector3(speed * direction * Time.deltaTime, 0, 0);
-            return;
         }
 
-        PatrolMovement();
+        PatrolMovement();   
     }
 
     void GroundCheck()
@@ -127,35 +129,28 @@ public class EnemyManager : MonoBehaviour
 
     void WallCheck()
     {
+        isWall = false; // 초기화
+
         if (direction == 1)
         {
-            isWall = Physics2D.OverlapCircle(wallCheckRight.position, 0.1f, LayerMask.GetMask("Ground"));
-
-            if (isWall)
+            if (Physics2D.OverlapCircle(wallCheckRight.position, 0.1f, LayerMask.GetMask("Ground")))
             {
+                isWall = true;
                 direction = -1;
                 GetComponent<SpriteRenderer>().flipX = true;
-            }
-            else
-            {
-                isWall = false;
             }
         }
         else if (direction == -1)
         {
-            isWall = Physics2D.OverlapCircle(wallCheckLeft.position, 0.1f, LayerMask.GetMask("Ground"));
-
-            if (isWall)
+            if (Physics2D.OverlapCircle(wallCheckLeft.position, 0.1f, LayerMask.GetMask("Ground")))
             {
+                isWall = true;
                 direction = 1;
                 GetComponent<SpriteRenderer>().flipX = false;
             }
-            else
-            {
-                isWall = false;
-            }
         }
     }
+
 
     // ----- 순찰 이동 처리 -----
     private void PatrolMovement()

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public Slider hpSlider;
+    public GameObject fill;
     public GameObject dash;
     public GameObject grappling;
     public GameObject wShort;
@@ -11,7 +12,14 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        hpSlider.value = (float)PlayerStats.Instance.currentHp / (float)PlayerStats.Instance.maxHp;
+        if(PlayerStats.Instance.currentHp <= 0)
+        {
+            fill.SetActive(false);
+        }
+        else
+        {
+            hpSlider.value = (float)PlayerStats.Instance.currentHp / (float)PlayerStats.Instance.maxHp;
+        }
 
         if (PlayerStats.Instance.skillType == SkillType.Dash)
         {

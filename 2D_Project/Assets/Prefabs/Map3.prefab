@@ -226,6 +226,7 @@ MonoBehaviour:
   walls:
   - {fileID: 6513553986894043895}
   - {fileID: 6223185413911351561}
+  - {fileID: 6223185413911351561}
   monster:
   - {fileID: 599486517392328548, guid: aaa4274213eb8964f9a5396a6c98560e, type: 3}
   - {fileID: 8874905116387180517, guid: 74ed038bbe29a9049a6d05c4d72c7bc9, type: 3}
