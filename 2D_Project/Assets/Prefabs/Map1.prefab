@@ -728,7 +728,7 @@ MonoBehaviour:
   - {fileID: 3801950338796490503}
   - {fileID: 9173614280384642748}
   monster:
-  - {fileID: 5866512551813542506, guid: e2cb42d495040ba43a1e0add6cbeadbc, type: 3}
+  - {fileID: 599486517392328548, guid: aaa4274213eb8964f9a5396a6c98560e, type: 3}
   - {fileID: 8874905116387180517, guid: 74ed038bbe29a9049a6d05c4d72c7bc9, type: 3}
   spawnPos:
   - {fileID: 2361312031764096575}
