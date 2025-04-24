@@ -90,20 +90,24 @@ public class PlayerController : MonoBehaviour
             if (PlayerStats.Instance.skillType == SkillType.Grappling)
             {
                 PlayerStats.Instance.ChangeSkill(SkillType.Dash);
+                SoundManager.Instance.PlaySFX(SFXType.Skill);
             }
             else if (PlayerStats.Instance.skillType == SkillType.Dash)
             {
                 PlayerStats.Instance.ChangeSkill(SkillType.Grappling);
+                SoundManager.Instance.PlaySFX(SFXType.Skill);
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             PlayerStats.Instance.ChangeWeapon(WeaponType.Long);
+            SoundManager.Instance.PlaySFX(SFXType.Long);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             PlayerStats.Instance.ChangeWeapon(WeaponType.Short);
+            SoundManager.Instance.PlaySFX(SFXType.Short);
         }
     }
 

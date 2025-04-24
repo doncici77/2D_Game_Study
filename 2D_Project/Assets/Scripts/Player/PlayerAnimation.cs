@@ -44,7 +44,6 @@ public class PlayerAnimation : MonoBehaviour
 
     public void PlayLanding()
     {
-        Debug.Log("Land »£√‚");
         animator.SetTrigger("Land");
         animator.SetBool("IsJumping", false);
         animator.SetBool("IsFalling", false);

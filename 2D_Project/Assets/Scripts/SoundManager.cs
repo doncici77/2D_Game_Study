@@ -208,5 +208,8 @@ public enum SFXType
     Dash,
     Rope,
     EnemyThrow,
-    Heal
+    Heal,
+    Skill,
+    Short,
+    Long
 }
