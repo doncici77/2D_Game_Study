@@ -103298,6 +103298,10 @@ PrefabInstance:
       propertyPath: uiManager
       value: 
       objectReference: {fileID: 5696686096412656434}
+    - target: {fileID: 514858683147504888, guid: 797e31bef6a0a14449b4068d7f11f32d, type: 3}
+      propertyPath: percision
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2400919589928682540, guid: 797e31bef6a0a14449b4068d7f11f32d, type: 3}
       propertyPath: m_Name
       value: Player0

@@ -109,8 +109,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-        if (!isGrapple && !isDashing)
+        if (!isGrapple && !isDashing) // 조건문으로 rb.linearVelocity 제어
         {
+            // 문제 되는 코드
             rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
 
             if(currentSpeed == runSpeed)

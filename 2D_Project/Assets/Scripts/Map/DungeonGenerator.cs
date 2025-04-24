@@ -15,16 +15,16 @@ public enum PortalDir
 
 public class DungeonGenerator : MonoBehaviour
 {
-    public GameObject[] roomPrefabs; // 방 프리팹 모음
+    public GameObject[] roomPrefabs; // 방 프리팹 종류
     public GameObject startMap;
     public int roomCount = 5;       // 만들 방 개수
     public Transform playerPos;
     public CinemachineConfiner2D confiner;
     public GameObject camera;
     private Vector3 currentMapPos = Vector3.zero;
-    private int[] roomVisit = new int[100];
-    private GameObject[] rooms = new GameObject[100];
-    public int roomNumber = 50;
+    private int[] roomVisit = new int[100]; // 맵 생성 여부
+    private GameObject[] rooms = new GameObject[100]; // 맵 데이터 배열
+    public int roomNumber = 50; // 현재 맵 위치
     public GameObject endPortal;
 
     private void Start()
@@ -58,12 +58,12 @@ public class DungeonGenerator : MonoBehaviour
             roomNumber++;
             currentMapPos = new Vector3(currentMapPos.x + 60, currentMapPos.y, currentMapPos.z);
 
-            if (roomVisit[roomNumber] == 0)
+            if (roomVisit[roomNumber] == 0) // 맵이 생성 되어 있지 않다면 
             {
                 if (roomCount > 0)
                 {
                     roomVisit[roomNumber] = 1;
-                    StartCoroutine(CreateMap(roomCount - 1, "Left"));
+                    StartCoroutine(CreateMap(roomCount - 1, "Left")); // 맵 생성과 플레이어 이동
 
                     roomCount--;
                 }
@@ -80,9 +80,9 @@ public class DungeonGenerator : MonoBehaviour
                     }
                 }
             }
-            else
+            else // 맵이 생성 되어 있다면
             {
-                StartCoroutine(TeleportMap("Left"));
+                StartCoroutine(TeleportMap("Left")); // 플레이어 이동만
             }
             Debug.Log("RoomNumber : " + roomNumber);
         }
