@@ -23,7 +23,6 @@ public class PlayerStats : MonoBehaviour
     public int maxHp = 100;
     public int currentHp;
     public int damage = 10;
-    public float moveSpeed = 3.0f;
     public SkillType skillType = SkillType.Grappling;
     public WeaponType weaponType = WeaponType.Short;
     public bool isDead = false;
@@ -156,12 +155,6 @@ public class PlayerStats : MonoBehaviour
     public void UpgradeHp(int amount)
     {
         maxHp += amount;
-        GameManager.instance.SavePlayerStats(this);
-    }
-
-    public void UpgradeMoveSpeed(float amount)
-    {
-        moveSpeed += amount;
         GameManager.instance.SavePlayerStats(this);
     }
 }

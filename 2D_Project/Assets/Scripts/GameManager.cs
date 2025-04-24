@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
     public void SavePlayerStats(PlayerStats stats)
     {
         PlayerPrefs.SetInt(DAMAGE_KEY, stats.damage);
-        PlayerPrefs.SetFloat(MOVE_SPEED_KEY, stats.moveSpeed);
         PlayerPrefs.SetInt(HP_KEY, stats.maxHp);
     }
 
@@ -73,10 +72,6 @@ public class GameManager : MonoBehaviour
         if(PlayerPrefs.HasKey(DAMAGE_KEY))
         {
             stats.damage = PlayerPrefs.GetInt(DAMAGE_KEY);
-        }
-        if (PlayerPrefs.HasKey(MOVE_SPEED_KEY))
-        {
-            stats.moveSpeed = PlayerPrefs.GetFloat(MOVE_SPEED_KEY);
         }
         if (PlayerPrefs.HasKey(HP_KEY))
         {

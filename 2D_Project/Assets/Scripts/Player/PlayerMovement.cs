@@ -25,9 +25,10 @@ public class PlayerMovement : MonoBehaviour
     public float dashingPower = 24f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
-    private bool isJumping = false;
-
     private TrailRenderer tr;
+
+    public GameObject RunSmokeLeft;
+    public GameObject RunSmokeRight;
 
     private void Start()
     {
@@ -111,6 +112,33 @@ public class PlayerMovement : MonoBehaviour
         if (!isGrapple && !isDashing)
         {
             rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
+
+            if(currentSpeed == runSpeed)
+            {
+                if(moveInput == 1)
+                {
+                    // 레프트 스모크 온
+                    RunSmokeLeft.SetActive(true);
+                    RunSmokeRight.SetActive(false);
+                }
+                else if(moveInput == -1)
+                {
+                    // 라이트 스모크 온
+                    RunSmokeRight.SetActive(true);
+                    RunSmokeLeft.SetActive(false);
+                }
+            }
+            else
+            {
+                RunSmokeLeft.SetActive(false);
+                RunSmokeRight.SetActive(false);
+            }
+        }
+        else
+        {
+            // 스모크 꺼짐
+            RunSmokeLeft.SetActive(false);
+            RunSmokeRight.SetActive(false);
         }
 
         // 점프
@@ -133,7 +161,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             playerAnimation.SetJumping(true);
-            isJumping = true;
         }
         else if (isGrounded && !Input.GetKey(KeyCode.Mouse1))
         {
@@ -143,7 +170,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             playerAnimation.SetFalling(true);
-            isJumping = false;
         }
 
         // 그래플 중일 때도 낙하 처리

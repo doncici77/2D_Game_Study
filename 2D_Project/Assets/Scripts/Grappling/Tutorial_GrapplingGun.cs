@@ -29,11 +29,13 @@ public class Tutorial_GrapplingGun : MonoBehaviour
 
     public float impulseForce = 5f; // 순간 힘의 세기
     private bool canImpulse = true;
+    private TrailRenderer trail;
 
     private void Start()
     {
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
+        trail = gunHolder.gameObject.GetComponent<TrailRenderer>();
     }
 
     private void Update()
@@ -53,6 +55,8 @@ public class Tutorial_GrapplingGun : MonoBehaviour
             {
                 if (grappleRope.enabled)
                 {
+                    trail.emitting = true;
+
                     RotateGun(grapplePoint);
 
                     // E 키: 오른쪽 방향으로 힘
@@ -79,6 +83,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
             {
                 grappleRope.enabled = false;
                 m_springJoint2D.enabled = false;
+                trail.emitting = false;
 
                 canImpulse = true;
             }
@@ -93,6 +98,7 @@ public class Tutorial_GrapplingGun : MonoBehaviour
         {
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
+            trail.emitting = false;
 
             canImpulse = true;
         }
@@ -134,6 +140,8 @@ public class Tutorial_GrapplingGun : MonoBehaviour
 
         m_springJoint2D.connectedAnchor = grapplePoint;
         m_springJoint2D.enabled = true;
+
+        ParticleManager.Instance.ParticlePlay(ParticleType.Grapple, grapplePoint, new Vector3(5, 5, 5));
     }
 
     private void OnDrawGizmosSelected()
